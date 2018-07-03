@@ -42,7 +42,15 @@ class MetalTextureView: MTKView,MTKViewDelegate {
             descriptor.sAddressMode = .repeat
             descriptor.tAddressMode = .repeat
             sampler = device.makeSamplerState(descriptor: descriptor)
+            
+            let tap2 = UITapGestureRecognizer(target: self, action: #selector(self.handleTap2(_:)))
+            tap2.numberOfTapsRequired = 2
+            addGestureRecognizer(tap2)
         }
+    }
+    
+    @objc func handleTap2(_ sender: UITapGestureRecognizer) {
+        vc.background.isHidden = !vc.background.isHidden
     }
     
     //MARK: -
