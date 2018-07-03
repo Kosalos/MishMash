@@ -1,0 +1,57 @@
+MishMash Fractal
+Collection of algorithms and UX from several other fractal apps,
+hoping to come with a new and interesting display.
+Jury is still out:  work in progress.
+Not really a fractal either. 
+
+The control widgets all work the same way:
+* Press and hold to either side of center to affect
+  parameter(s) in specified direction and speed.
+* Double Tap to toggle Fast versus Slow editing.
+  (Red vs Green background color)
+
+Note: Single tap on any widget to give it the FOCUS.
+It will gain a red colored border.
+Click and drag on the image to apply the movement to the widget.
+The widgets' Fast vs Slow edit style affects the movements.
+
+Note: Double tap the image to toggle the control panel visibility.
+
+A. The app Flam3 uses a weighted random function to select which
+   algorithm is used every cycle.
+   This app instead uses a simple grammar, where the characters in
+   a 1-12 character string specify which algorithm is used.
+   The grammar string is repeated as necessary during a
+   256 cycle drawing session.
+   Press on the grammar string to launch the grammar editor dialog.
+
+B. The grammar string selects from 4 algorithms for each cycle.
+   These 4 groups hold all the data for each algorithm.
+   Press on the function name to launch the function selection dialog.
+   The functions themselves come from the Flam3 app.
+C. (T)ranslation
+D. (S)cale
+E. (R)otation affect the function output after every cycle.
+
+On fractalforums.org, user 3DickUlus posted a beautiful image
+   with the fragment shader attached.
+   I copied the algorithm into this app to do some experimentation.
+
+F. Multiplier
+G. EscapeRadius
+H. StripeDensity  are all parameters to 3DickUlus' coloring algorithm.
+   Check out the shader code for usage.
+
+I. Contrast
+J. Shadow  are two effects I added myself.
+
+K. Random  randommly select all data fields.
+   Keep clicking until you come across a configuration that produces an image..
+
+L. Color R,G,B  affect the relative coloring
+M. Launch the Save/Load dialog.
+N. Move : Scroll the image in X/Y.
+O. Zoom : Zoom into the fractal.
+P. Rnd G : Randomize just the grammar string
+Q. Res :  Toggle hi / low resolution
+
