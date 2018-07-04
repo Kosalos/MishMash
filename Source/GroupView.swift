@@ -42,11 +42,11 @@ class GroupView : UIView {
         // ----------------------------------------------------------
         setControlPointer(&control);
 
-        let pMin:Float = -2
-        let pMax:Float = +2
+        let pMin:Float = -3
+        let pMax:Float = +3
         let pChg:Float = 0.25
-        let sMin:Float = 0.5
-        let sMax:Float = +2
+        let sMin:Float = 0.1
+        let sMax:Float = +4
         let sChg:Float = 0.25
         
         rot.initSingle(funcRotPointer(index),pMin,pMax,pChg,"R")

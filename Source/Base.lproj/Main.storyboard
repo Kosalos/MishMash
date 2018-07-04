@@ -14,20 +14,20 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="MishMashFractal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="MishMash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9sQ-bp-QHc"/>
                         <viewControllerLayoutGuide type="bottom" id="yDg-Pc-LEh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3se-qz-xqx" customClass="MetalTextureView" customModule="MishMashFractal" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3se-qz-xqx" customClass="MetalTextureView" customModule="MishMash" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-f4-rFM" customClass="Background" customModule="MishMashFractal" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-f4-rFM" customClass="Background" customModule="MishMash" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="408" height="544"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeO-5k-4ZX" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeO-5k-4ZX" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="53" y="69" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079884101" green="0.27447522079884101" blue="0.27447522079884101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -55,7 +55,7 @@
                                             </segue>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiQ-P1-SOL" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiQ-P1-SOL" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="52" y="243" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -67,7 +67,7 @@
                                             <action selector="shadowChanged:" destination="BV1-FR-VrT" eventType="touchUpInside" id="WGi-Wi-Uci"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xr-rl-Xpn" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xr-rl-Xpn" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="53" y="113" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079884101" green="0.27447522079884101" blue="0.27447522079884101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -81,62 +81,62 @@
                                             </segue>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-X7-Qm9" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-X7-Qm9" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="39" y="378" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P00-0O-R7D" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P00-0O-R7D" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="39" y="418" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVe-hA-FOv" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVe-hA-FOv" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="39" y="337" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8m-rW-sye" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8m-rW-sye" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="121" y="297" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5a-9I-Rly" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5a-9I-Rly" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="121" y="337" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DC6-gd-udP" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DC6-gd-udP" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="121" y="377" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtC-WN-Vtg" customClass="Widget" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtC-WN-Vtg" customClass="Widget" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="121" y="417" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-Zp-Xzw" customClass="GroupView" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-Zp-Xzw" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="210" y="104" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6cQ-Uo-eB6" customClass="GroupView" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6cQ-Uo-eB6" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="210" y="162" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74l-qD-z5e" customClass="GroupView" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74l-qD-z5e" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="210" y="220" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAk-sK-pEp" customClass="GroupView" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAk-sK-pEp" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="210" y="278" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-JP-6kn" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-JP-6kn" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="52" y="157" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -148,17 +148,17 @@
                                             <action selector="randomButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="yoe-8a-39u"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpJ-lS-0xe" customClass="CMove" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpJ-lS-0xe" customClass="CMove" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="38" y="476" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Knj-8m-l8D" customClass="CZoom" customModule="MishMashFractal" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Knj-8m-l8D" customClass="CZoom" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="96" y="476" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giJ-OU-HaI" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giJ-OU-HaI" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="224" y="364" width="123" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -170,7 +170,7 @@
                                             <action selector="rndGButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="e8S-xR-PLg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lI-Rq-Ly2" customClass="BorderedButton" customModule="MishMashFractal" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lI-Rq-Ly2" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="224" y="408" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -225,7 +225,7 @@
         <!--SaveLoadVC-->
         <scene sceneID="7cL-dd-aq2">
             <objects>
-                <viewController title="KeypadVC" id="IYT-Gi-YRN" userLabel="SaveLoadVC" customClass="SaveLoadViewController" customModule="MishMashFractal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="KeypadVC" id="IYT-Gi-YRN" userLabel="SaveLoadVC" customClass="SaveLoadViewController" customModule="MishMash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YOC-hq-7i4"/>
                         <viewControllerLayoutGuide type="bottom" id="QOV-Ux-k8R"/>
@@ -238,7 +238,7 @@
                                 <rect key="frame" x="13" y="9" width="373" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SLCell" rowHeight="58" id="XKy-ra-BmS" customClass="SaveLoadCell" customModule="MishMashFractal" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SLCell" rowHeight="58" id="XKy-ra-BmS" customClass="SaveLoadCell" customModule="MishMash" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="373" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XKy-ra-BmS" id="fcL-5w-6kH">
@@ -312,7 +312,7 @@
         <!--Grammar View Controller-->
         <scene sceneID="Btq-ZM-kp7">
             <objects>
-                <viewController id="vUJ-3P-OVZ" customClass="GrammarViewController" customModule="MishMashFractal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vUJ-3P-OVZ" customClass="GrammarViewController" customModule="MishMash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jpB-g8-xaW"/>
                         <viewControllerLayoutGuide type="bottom" id="OJj-09-1NU"/>
@@ -321,8 +321,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="475"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="60R-15-KMa">
-                                <rect key="frame" x="28" y="29" width="194" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="60R-15-KMa">
+                                <rect key="frame" x="39" y="29" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -335,8 +336,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="ZHc-jc-4NG"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-XC-OtE">
+                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-XC-OtE">
                                 <rect key="frame" x="39" y="65" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -349,8 +351,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="645-kb-5Fb"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="q73-Sm-Pf2">
+                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="q73-Sm-Pf2">
                                 <rect key="frame" x="39" y="101" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -363,8 +366,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="y6x-Si-WdG"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OO5-ui-Uma">
+                            <segmentedControl opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OO5-ui-Uma">
                                 <rect key="frame" x="39" y="137" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -377,8 +381,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="6RA-ma-eQ9"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="4" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PKT-Xt-VxS">
+                            <segmentedControl opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PKT-Xt-VxS">
                                 <rect key="frame" x="39" y="173" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -391,8 +396,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="7bM-gQ-z46"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="5" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Go0-o6-EIB">
+                            <segmentedControl opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Go0-o6-EIB">
                                 <rect key="frame" x="39" y="209" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -405,8 +411,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="cO0-Pz-H99"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="6" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cbf-IN-U64">
+                            <segmentedControl opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cbf-IN-U64">
                                 <rect key="frame" x="39" y="245" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -419,8 +426,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="0jo-EQ-IeM"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="7" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="axG-u1-TZh">
+                            <segmentedControl opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="axG-u1-TZh">
                                 <rect key="frame" x="39" y="281" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -433,8 +441,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="7tv-Or-nV3"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="8" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mw6-CQ-wb3">
+                            <segmentedControl opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mw6-CQ-wb3">
                                 <rect key="frame" x="39" y="317" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -447,8 +456,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="m9l-jM-2NU"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="9" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1tk-x2-Phe">
+                            <segmentedControl opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1tk-x2-Phe">
                                 <rect key="frame" x="39" y="353" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -461,8 +471,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="VdR-vh-EKd"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="10" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fon-Sf-fN2">
+                            <segmentedControl opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fon-Sf-fN2">
                                 <rect key="frame" x="39" y="389" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -475,8 +486,9 @@
                                     <action selector="cChanged:" destination="vUJ-3P-OVZ" eventType="valueChanged" id="s45-zU-nrt"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" tag="11" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Iob-kl-VwP">
+                            <segmentedControl opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Iob-kl-VwP">
                                 <rect key="frame" x="39" y="425" width="172" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -491,44 +503,6 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Go0-o6-EIB" firstAttribute="trailing" secondItem="Cbf-IN-U64" secondAttribute="trailing" id="03v-yn-3Jl"/>
-                            <constraint firstItem="OO5-ui-Uma" firstAttribute="leading" secondItem="PKT-Xt-VxS" secondAttribute="leading" id="4aU-Uy-E7p"/>
-                            <constraint firstItem="PKT-Xt-VxS" firstAttribute="top" secondItem="OO5-ui-Uma" secondAttribute="bottom" constant="8" symbolic="YES" id="8Tb-Wk-pdU"/>
-                            <constraint firstItem="ypS-XC-OtE" firstAttribute="trailing" secondItem="q73-Sm-Pf2" secondAttribute="trailing" id="Cka-7l-Ftx"/>
-                            <constraint firstItem="Iob-kl-VwP" firstAttribute="top" secondItem="fon-Sf-fN2" secondAttribute="bottom" constant="8" symbolic="YES" id="CtA-1W-4cL"/>
-                            <constraint firstItem="q73-Sm-Pf2" firstAttribute="trailing" secondItem="OO5-ui-Uma" secondAttribute="trailing" id="DPY-tC-NKB"/>
-                            <constraint firstItem="PKT-Xt-VxS" firstAttribute="leading" secondItem="Go0-o6-EIB" secondAttribute="leading" id="FqK-JW-TxL"/>
-                            <constraint firstItem="q73-Sm-Pf2" firstAttribute="top" secondItem="ypS-XC-OtE" secondAttribute="bottom" constant="8" symbolic="YES" id="GcQ-xP-Cf7"/>
-                            <constraint firstItem="ypS-XC-OtE" firstAttribute="leading" secondItem="q73-Sm-Pf2" secondAttribute="leading" id="H23-QB-EvZ"/>
-                            <constraint firstItem="1tk-x2-Phe" firstAttribute="leading" secondItem="fon-Sf-fN2" secondAttribute="leading" id="I9G-OL-MhH"/>
-                            <constraint firstItem="axG-u1-TZh" firstAttribute="top" secondItem="Cbf-IN-U64" secondAttribute="bottom" constant="8" symbolic="YES" id="IyN-gX-V3p"/>
-                            <constraint firstItem="60R-15-KMa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vTd-33-z4i" secondAttribute="leadingMargin" id="Km9-lc-VDr"/>
-                            <constraint firstItem="60R-15-KMa" firstAttribute="top" secondItem="jpB-g8-xaW" secondAttribute="bottom" constant="9" id="LLb-MO-bTm"/>
-                            <constraint firstItem="fon-Sf-fN2" firstAttribute="trailing" secondItem="Iob-kl-VwP" secondAttribute="trailing" id="OiK-6o-2ce"/>
-                            <constraint firstItem="axG-u1-TZh" firstAttribute="trailing" secondItem="Mw6-CQ-wb3" secondAttribute="trailing" id="PCo-Tq-hNb"/>
-                            <constraint firstItem="Mw6-CQ-wb3" firstAttribute="trailing" secondItem="1tk-x2-Phe" secondAttribute="trailing" id="PJb-DJ-ZL8"/>
-                            <constraint firstItem="OO5-ui-Uma" firstAttribute="top" secondItem="q73-Sm-Pf2" secondAttribute="bottom" constant="8" symbolic="YES" id="PRJ-3P-k4k"/>
-                            <constraint firstItem="Cbf-IN-U64" firstAttribute="trailing" secondItem="axG-u1-TZh" secondAttribute="trailing" id="RtF-Iw-G1d"/>
-                            <constraint firstItem="OO5-ui-Uma" firstAttribute="trailing" secondItem="PKT-Xt-VxS" secondAttribute="trailing" id="SkR-lz-D0D"/>
-                            <constraint firstItem="1tk-x2-Phe" firstAttribute="trailing" secondItem="fon-Sf-fN2" secondAttribute="trailing" id="Tja-zB-q2x"/>
-                            <constraint firstItem="Mw6-CQ-wb3" firstAttribute="top" secondItem="axG-u1-TZh" secondAttribute="bottom" constant="8" symbolic="YES" id="UCD-rv-TkH"/>
-                            <constraint firstItem="q73-Sm-Pf2" firstAttribute="leading" secondItem="OO5-ui-Uma" secondAttribute="leading" id="c9l-Hw-XdV"/>
-                            <constraint firstItem="60R-15-KMa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ypS-XC-OtE" secondAttribute="trailing" id="chV-9n-jmd"/>
-                            <constraint firstItem="Cbf-IN-U64" firstAttribute="leading" secondItem="axG-u1-TZh" secondAttribute="leading" id="dM3-2Y-MIT"/>
-                            <constraint firstItem="1tk-x2-Phe" firstAttribute="top" secondItem="Mw6-CQ-wb3" secondAttribute="bottom" constant="8" symbolic="YES" id="eGn-yZ-mpv"/>
-                            <constraint firstItem="fon-Sf-fN2" firstAttribute="leading" secondItem="Iob-kl-VwP" secondAttribute="leading" id="jbI-pP-ubA"/>
-                            <constraint firstItem="Go0-o6-EIB" firstAttribute="leading" secondItem="Cbf-IN-U64" secondAttribute="leading" id="nKa-Yg-A9c"/>
-                            <constraint firstItem="axG-u1-TZh" firstAttribute="leading" secondItem="Mw6-CQ-wb3" secondAttribute="leading" id="nOe-18-I5S"/>
-                            <constraint firstItem="PKT-Xt-VxS" firstAttribute="trailing" secondItem="Go0-o6-EIB" secondAttribute="trailing" id="p7v-nI-meN"/>
-                            <constraint firstItem="fon-Sf-fN2" firstAttribute="top" secondItem="1tk-x2-Phe" secondAttribute="bottom" constant="8" symbolic="YES" id="rZN-94-XuL"/>
-                            <constraint firstItem="60R-15-KMa" firstAttribute="centerX" secondItem="vTd-33-z4i" secondAttribute="centerX" id="rtb-bg-90h"/>
-                            <constraint firstItem="Cbf-IN-U64" firstAttribute="top" secondItem="Go0-o6-EIB" secondAttribute="bottom" constant="8" symbolic="YES" id="uIz-7C-m30"/>
-                            <constraint firstItem="Go0-o6-EIB" firstAttribute="top" secondItem="PKT-Xt-VxS" secondAttribute="bottom" constant="8" symbolic="YES" id="uLK-NJ-DIh"/>
-                            <constraint firstItem="Mw6-CQ-wb3" firstAttribute="leading" secondItem="1tk-x2-Phe" secondAttribute="leading" id="vQH-7T-LTN"/>
-                            <constraint firstItem="ypS-XC-OtE" firstAttribute="top" secondItem="60R-15-KMa" secondAttribute="bottom" constant="8" symbolic="YES" id="xnJ-ww-zAL"/>
-                            <constraint firstItem="60R-15-KMa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ypS-XC-OtE" secondAttribute="leading" id="yoq-hJ-xzZ"/>
-                        </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="250" height="475"/>
                     <size key="freeformSize" width="250" height="475"/>
@@ -549,12 +523,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEl-00-Ryt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1063" y="-422"/>
+            <point key="canvasLocation" x="-1064.0625" y="-422.32796486090774"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="SJ5-qL-JDu">
             <objects>
-                <viewController id="5CA-AY-ZSF" customClass="HelpViewController" customModule="MishMashFractal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5CA-AY-ZSF" customClass="HelpViewController" customModule="MishMash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wV2-J6-T2n"/>
                         <viewControllerLayoutGuide type="bottom" id="A4n-4y-7J1"/>
@@ -603,7 +577,7 @@
         <!--Function List View Controller-->
         <scene sceneID="v3N-fl-sKU">
             <objects>
-                <viewController storyboardIdentifier="FList" id="HPx-jc-udr" customClass="FunctionListViewController" customModule="MishMashFractal" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FList" id="HPx-jc-udr" customClass="FunctionListViewController" customModule="MishMash" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vKA-t9-RMn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -652,6 +626,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="help" width="1003" height="535"/>
+        <image name="help" width="1003" height="534"/>
     </resources>
 </document>
