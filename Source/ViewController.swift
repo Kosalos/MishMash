@@ -280,11 +280,12 @@ class ViewController: UIViewController {
         
         updateImage()
     }
+
+    //MARK: -
     
-    func alterZoom(_ dz:Float) {
-        let deltaZoom:Float = 0.5 + dz / 50
-        let xsize = (control.xmax - control.xmin) * deltaZoom
-        let ysize = (control.ymax - control.ymin) * deltaZoom
+    func alterZoomCommon(_ dz:Float) {
+        let xsize = (control.xmax - control.xmin) * dz
+        let ysize = (control.ymax - control.ymin) * dz
         let xc = (control.xmin + control.xmax) / 2
         let yc = (control.ymin + control.ymax) / 2
         
@@ -293,7 +294,21 @@ class ViewController: UIViewController {
         
         updateImage()
     }
+
+    func alterZoom(_ dz:Float) {
+        alterZoomCommon(0.5 + dz / 50)
+    }
+
+    var pace:Int = 0
     
+    func alterZoomViaPinch(_ dz:Float) {  // 0.1 ... 6.0
+        pace += 1; if pace < 5 { return }
+        pace = 0
+        
+        let amt:Float = 1 - (dz - 1.0) * 0.1
+        alterZoomCommon(amt / 2)
+    }
+
     //MARK: -
     
     func calcFractal() {

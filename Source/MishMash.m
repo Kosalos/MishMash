@@ -27,6 +27,8 @@ void controlRandomGrammar(void) {
 }
 
 void controlRandom(void) {
+    srand((unsigned int)clock());
+    
     cPtr->xmin = -4;    // initial position & zoom
     cPtr->xmax = +4;
     cPtr->ymin = -4;

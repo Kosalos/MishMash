@@ -16,6 +16,7 @@ Click and drag on the image to apply the movement to the widget.
 The widgets' Fast vs Slow edit style affects the movements.
 
 Note: Double tap the image to toggle the control panel visibility.
+Note: Pinch the image to control zoom.
 
 A. The app Flam3 uses a weighted random function to select which
    algorithm is used every cycle.

@@ -46,11 +46,18 @@ class MetalTextureView: MTKView,MTKViewDelegate {
             let tap2 = UITapGestureRecognizer(target: self, action: #selector(self.handleTap2(_:)))
             tap2.numberOfTapsRequired = 2
             addGestureRecognizer(tap2)
+            
+            let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(_:)))
+            addGestureRecognizer(pinch)
         }
     }
     
     @objc func handleTap2(_ sender: UITapGestureRecognizer) {
         vc.background.isHidden = !vc.background.isHidden
+    }
+
+    @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        vc.alterZoomViaPinch(Float(sender.scale))
     }
     
     //MARK: -
@@ -91,6 +98,7 @@ class MetalTextureView: MTKView,MTKViewDelegate {
         }
     }
     
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { touchesEnded(touches, with:event) }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         pt.x = 0
         pt.y = 0

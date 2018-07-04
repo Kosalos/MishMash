@@ -5,8 +5,6 @@ using namespace metal;
 
 float2 functionCall(float2 old,constant Function *func);
 
-float2 complexMul(float2 v1, float2 v2, float sR, float sI) { return float2((v1.x * v2.x - v1.y * v2.y) * sR, (v1.x * v2.y + v1.y * v2.x) * sI); }
-
 kernel void fractalShader
 (
  texture2d<float, access::write> outTexture [[texture(0)]],
