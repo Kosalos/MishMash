@@ -40,8 +40,6 @@ class GroupView : UIView {
         addSubview(scl)
 
         // ----------------------------------------------------------
-        setControlPointer(&control);
-
         let pMin:Float = -3
         let pMax:Float = +3
         let pChg:Float = 0.25

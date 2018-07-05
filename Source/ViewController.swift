@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     @IBOutlet var randomButton: UIButton!
     @IBOutlet var rndGButton: UIButton!
     @IBOutlet var resButton: UIButton!
+    @IBOutlet var emailButton: UIButton!
     @IBOutlet var sStripeDensity: Widget!
     @IBOutlet var sEscapeRadius: Widget!
     @IBOutlet var sMultiplier: Widget!
@@ -53,11 +54,13 @@ class ViewController: UIViewController {
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
 
+    @IBAction func emailButtonPressed(_ sender: UIButton) { sendEmail() }
+
     @IBAction func rndGButtonPressed(_ sender: UIButton) {
         controlRandomGrammar()
         loadedData()
     }
-
+    
     @IBAction func resButtonPressed(_ sender: UIButton) {
         hiResFlag = !hiResFlag
         setImageViewResolutionAndThreadGroups()
@@ -65,7 +68,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func randomButtonPressed(_ sender: UIButton) { randomize() }
-
+    
     func updateWidgets() {
         shadowButton.backgroundColor = shadowFlag ? bsOn : bsOff
         resButton.backgroundColor = hiResFlag ? bsOn : bsOff
@@ -86,6 +89,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vc = self
+        setControlPointer(&control);
         
         wList = [ sStripeDensity,sEscapeRadius,sMultiplier,sR,sG,sB,sContrast ] as! [Widget]
         gList = [ g1,g2,g3,g4 ]
@@ -119,10 +123,67 @@ class ViewController: UIViewController {
         
         Timer.scheduledTimer(withTimeInterval:0.02, repeats:true) { timer in self.timerHandler() }
         randomize()
+        
+        if remoteLaunchOptionsLoad() { Timer.scheduledTimer(withTimeInterval:1, repeats:false) { timer in self.timerKick() }}
     }
     
     //MARK: -
+
+    @objc func timerKick() { loadedData() }
     
+    //MARK: -
+    /*
+     sending and receiving data via email
+     1. launchOptions captured in AppDelegate didFinishLaunchingWithOptions()
+     2. these routines just below to handle Loading data from launchOptions, and using docController to send the data
+     3. edit project settings:  Target <Info> section, note the items added to "Document Types", "Imported UTIs" and "Exported UTIs"
+
+     how to send:
+     1.use the program as usual to display an image you like
+     2.press "E" to launch airDrop popup.  Select 'Mail' icon.  Send email..
+     
+     how to receive:
+     1. Launch the iPads built in Mail app.
+     2. select the email with MishMash attachment.
+     3. Tap attachment, then "Copy to MishMash" icon
+     4. TODO:  image is loaded okay, but sometimes the app needs to be touched for force correct redraw.
+     
+     Please help: If the program is in the 'recently used list' (use 4 fingers to sweep up from bottom of iPad), then remote loading doesn't always work).
+    */
+    
+    // https://stackoverflow.com/questions/29399341/uidocumentinteractioncontroller-swift
+    var fileURL:URL! = nil
+    var docController:UIDocumentInteractionController!
+
+    func sendEmail() {
+        var fileURL:URL! = nil
+        let name = "MishMash.msh"
+        fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(name)
+
+        do {
+            control.version = Int32(versionNumber)
+            let sz = MemoryLayout<Control>.size
+            let data = NSData(bytes:&control, length: sz)
+            try data.write(to: fileURL, options: .atomic)
+        } catch { print(error); return }
+
+        docController = UIDocumentInteractionController(url: fileURL)
+        _ = docController.presentOptionsMenu(from: emailButton.frame, in:emailButton, animated:true) // !!  this must be a button
+    }
+    
+    func remoteLaunchOptionsLoad() -> Bool {
+        if remoteLaunchOptions == nil { return false }
+        
+        let hk:URL = remoteLaunchOptions[UIApplicationLaunchOptionsKey.url] as! URL
+        let sz = MemoryLayout<Control>.size
+        let data = NSData(contentsOf:hk)
+        data?.getBytes(&control, length:sz)
+        
+        return true
+    }
+    
+    //MARK: -
+
     @objc func timerHandler() {
         var refresh:Bool = false
         for i in wList { if i.update() { refresh = true }}
@@ -140,14 +201,13 @@ class ViewController: UIViewController {
     
     func loadedData() {
         updateGrammarString()
-        refresh()
     }
     
     func randomize() {
         controlRandom()
         loadedData()
     }
-
+    
     func updateGrammarString() {
         var chars:[UInt8] = []
         for i in 0 ..< MAX_GRAMMER { chars.append(UInt8(getGrammarCharacter(Int32(i)))) }
@@ -231,12 +291,15 @@ class ViewController: UIViewController {
         for t in t2List { t.frame = frame(cxs,bys,0,gap) }
         cMove.frame = frame(70,60,75,0)
         cZoom.frame = frame(70,60,0,0)
-
+        
         x = gxs + cxs + 15
         y = 5
-        let t3List = [ randomButton,sR,sG,sB,saveLoadButton ] as [UIView]
+        emailButton.frame = frame(cxs*1/3-3,bys,cxs*1/3,0)
+        randomButton.frame = frame(cxs*2/3,bys,0,gap)
+        x = gxs + cxs + 15
+        let t3List = [ sR,sG,sB,saveLoadButton ] as [UIView]
         for t in t3List { t.frame = frame(cxs,bys,0,gap) }
-
+        
         x += 55
         y += 10
         helpButton.frame = frame(bys,bys,0,0)
@@ -262,7 +325,7 @@ class ViewController: UIViewController {
         texture2 = self.device.makeTexture(descriptor: textureDescriptor)!
         
         metalTextureView.initialize(texture1)
-
+        
         let maxsz = max(xsz,ysz) + Int(threadGroupCount.width-1)
         threadGroups = MTLSizeMake(
             maxsz / threadGroupCount.width,
@@ -280,7 +343,7 @@ class ViewController: UIViewController {
         
         updateImage()
     }
-
+    
     //MARK: -
     
     func alterZoomCommon(_ dz:Float) {
@@ -294,11 +357,11 @@ class ViewController: UIViewController {
         
         updateImage()
     }
-
+    
     func alterZoom(_ dz:Float) {
         alterZoomCommon(0.5 + dz / 50)
     }
-
+    
     var pace:Int = 0
     
     func alterZoomViaPinch(_ dz:Float) {  // 0.1 ... 6.0
@@ -308,7 +371,7 @@ class ViewController: UIViewController {
         let amt:Float = 1 - (dz - 1.0) * 0.1
         alterZoomCommon(amt / 2)
     }
-
+    
     //MARK: -
     
     func calcFractal() {
@@ -345,11 +408,11 @@ class ViewController: UIViewController {
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
     }
-
+    
     //MARK: -
     
     var isBusy:Bool = false
-
+    
     func updateImage() {
         if !isBusy {
             isBusy = true

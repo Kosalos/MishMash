@@ -48,7 +48,7 @@
 		1D38AE5D20E952EE0048F168 /* GroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		1D38AE5F20E956C10048F168 /* MishMash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MishMash.h; sourceTree = "<group>"; };
 		1D38AE6020E956C10048F168 /* MishMash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MishMash.m; sourceTree = "<group>"; };
-		1D594DC6206B17F900A7EB3A /* MandelBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBox.app; path = MishMashFractal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D594DC6206B17F900A7EB3A /* MandelBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBox.app; path = MishMash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D83DA2E20EBE4D200747C0D /* MetalTextureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTextureView.swift; sourceTree = "<group>"; };
 		1D83DA2F20EBE4D200747C0D /* MetalTextureView.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = MetalTextureView.metal; sourceTree = "<group>"; };
 		1DCAC5741FA349E6000E90E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };

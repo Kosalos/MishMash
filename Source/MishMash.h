@@ -39,6 +39,7 @@ void controlRandom(void);
 void controlRandomGrammar(void);
 
 void setControlPointer(Control *ptr);
+char *controlDebugString(void);
 void setGrammarCharacter(int index, char chr);
 int  getGrammarCharacter(int index);
 

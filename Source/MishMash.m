@@ -55,6 +55,18 @@ void controlRandom(void) {
     cPtr->contrast = rndF(0.1,5);
 }
 
+char *controlDebugString(void) {
+    static char str[1024];
+    sprintf(str,"V: %d\nFunc: %d,%d,%d,%d\nM: %8.5f\n",
+            cPtr->version,
+            cPtr->function[0].index,
+            cPtr->function[1].index,
+            cPtr->function[2].index,
+            cPtr->function[3].index,
+            cPtr->multiplier);
+    return str;
+}
+
 int* funcIndexPointer(int fIndex) { return &(cPtr->function[fIndex].index); }
 int  funcIndex(int fIndex) { return cPtr->function[fIndex].index; }
 

@@ -182,6 +182,18 @@
                                             <action selector="resButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="hg5-SR-H2h"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OsH-fJ-3up" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
+                                        <rect key="frame" x="224" y="452" width="120" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="E">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="emailButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="FEH-qF-Bas"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -194,6 +206,7 @@
                         <outlet property="background" destination="ORw-f4-rFM" id="uPu-eh-fyj"/>
                         <outlet property="cMove" destination="RpJ-lS-0xe" id="DSS-od-g0W"/>
                         <outlet property="cZoom" destination="Knj-8m-l8D" id="pdH-jd-SeB"/>
+                        <outlet property="emailButton" destination="OsH-fJ-3up" id="oIN-FJ-vS4"/>
                         <outlet property="g1" destination="Rwi-Zp-Xzw" id="5ii-X1-3Yt"/>
                         <outlet property="g2" destination="6cQ-Uo-eB6" id="HUF-KS-7e7"/>
                         <outlet property="g3" destination="74l-qD-z5e" id="yZK-fx-ALt"/>

@@ -49,6 +49,8 @@ J. Shadow  are two effects I added myself.
 K. Random  randommly select all data fields.
    Keep clicking until you come across a configuration that produces an image..
 
+   "E" button launches Send EMail popup
+
 L. Color R,G,B  affect the relative coloring
 M. Launch the Save/Load dialog.
 N. Move : Scroll the image in X/Y.
