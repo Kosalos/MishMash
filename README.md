@@ -2,14 +2,14 @@
 Collection of fractal algorithms in one app
 Fractal for iPad uses Swift 4 and Metal
 
-Help:
-ViewController holds the email send/receive code.
-Have a problem I hope someone can resolve for me:
-If the program is in the 'recently used list' (use 4 fingers to sweep up from bottom of iPad), then remote loading doesn't always work.
-Why? how to fix? 
-otherwise, loading from email works okay..
-Help:
-
+Help: =====================================================\
+ViewController holds the email send/receive code.\
+Have a problem I hope someone can resolve for me:\
+If the program is in the 'recently used list' (use 4 fingers to sweep up from bottom of iPad), \
+then remote loading doesn't always work.\
+Why? how to fix? \
+otherwise, loading from email works okay.. \
+Help: =====================================================
 
 Visit: https://fractalforums.org/fractal-mathematics-and-new-theories/28/triangle-inequality-average-algorithm/1368
 User 3DickUlus posted a beautiful image with the fragment shader attached.
