@@ -147,8 +147,6 @@ class ViewController: UIViewController {
      2. select the email with MishMash attachment.
      3. Tap attachment, then "Copy to MishMash" icon
      4. TODO:  image is loaded okay, but sometimes the app needs to be touched for force correct redraw.
-     
-     Please help: If the program is in the 'recently used list' (use 4 fingers to sweep up from bottom of iPad), then remote loading doesn't always work).
     */
     
     // https://stackoverflow.com/questions/29399341/uidocumentinteractioncontroller-swift
