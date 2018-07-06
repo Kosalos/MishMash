@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     lazy var commandQueue: MTLCommandQueue! = { return self.device.makeCommandQueue() }()
     var shadowFlag:Bool = false
     var hiResFlag:Bool = false
+    var autoMoveFlag:Bool = false
     var gList:[GroupView]! = nil
     
     let threadGroupCount = MTLSizeMake(20,20,1)
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
     @IBOutlet var rndGButton: UIButton!
     @IBOutlet var resButton: UIButton!
     @IBOutlet var emailButton: UIButton!
+    @IBOutlet var autoButton: UIButton!
     @IBOutlet var sStripeDensity: Widget!
     @IBOutlet var sEscapeRadius: Widget!
     @IBOutlet var sMultiplier: Widget!
@@ -54,6 +56,12 @@ class ViewController: UIViewController {
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
 
+    @IBAction func autoButtonPressed(_ sender: UIButton) {
+        autoMoveFlag = !autoMoveFlag
+        if autoMoveFlag { controlInitAutoMove() }
+        updateWidgets()
+    }
+    
     @IBAction func emailButtonPressed(_ sender: UIButton) { sendEmail() }
 
     @IBAction func rndGButtonPressed(_ sender: UIButton) {
@@ -72,6 +80,7 @@ class ViewController: UIViewController {
     func updateWidgets() {
         shadowButton.backgroundColor = shadowFlag ? bsOn : bsOff
         resButton.backgroundColor = hiResFlag ? bsOn : bsOff
+        autoButton.backgroundColor = autoMoveFlag ? bsOn : bsOff
         for i in 0 ..< gList.count { gList[i].refresh(isFunctionActive(Int32(i)) > 0) }
         for i in wList { i.setNeedsDisplay() }
     }
@@ -97,7 +106,7 @@ class ViewController: UIViewController {
         
         sStripeDensity.initSingle(&control.stripeDensity, -10,10,2, "Stripe")
         sEscapeRadius.initSingle(&control.escapeRadius, 0.01,80,3, "Escape")
-        sMultiplier.initSingle(&control.multiplier, -1,1,0.1, "Multiplier")
+        sMultiplier.initSingle(&control.multiplier, -1,1,0.1, "Mult")
         sR.initSingle(&control.R, 0,1,0.15, "Color R")
         sG.initSingle(&control.G, 0,1,0.15, "Color G")
         sB.initSingle(&control.B, 0,1,0.15, "Color B")
@@ -187,6 +196,13 @@ class ViewController: UIViewController {
         for i in wList { if i.update() { refresh = true }}
         if cMove.update() { refresh = true }
         if cZoom.update() { refresh = true }
+        
+        if autoMoveFlag {
+            controlAutoMove();
+            for i in wList { i.setNeedsDisplay() }
+            refresh = true
+        }
+        
         if refresh { updateImage() }
     }
     
@@ -285,7 +301,10 @@ class ViewController: UIViewController {
         
         x = 10 + gxs
         y = 5
-        let t2List = [ sMultiplier,sEscapeRadius,sStripeDensity,sContrast,shadowButton ] as [UIView]
+        sMultiplier.frame = frame(cxs*2/3-3,bys,cxs*2/3,0)
+        autoButton.frame = frame(cxs*1/3,bys,0,gap)
+        x = 10 + gxs
+        let t2List = [ sEscapeRadius,sStripeDensity,sContrast,shadowButton ] as [UIView]
         for t in t2List { t.frame = frame(cxs,bys,0,gap) }
         cMove.frame = frame(70,60,75,0)
         cZoom.frame = frame(70,60,0,0)

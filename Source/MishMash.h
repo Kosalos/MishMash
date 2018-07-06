@@ -37,6 +37,8 @@ typedef struct {
 
 void controlRandom(void);
 void controlRandomGrammar(void);
+void controlInitAutoMove(void);
+void controlAutoMove(void);
 
 void setControlPointer(Control *ptr);
 char *controlDebugString(void);

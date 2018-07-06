@@ -85,6 +85,72 @@ int isFunctionActive(int index) {
     return 0;
 }
 
+//MARK: -
+
+#define NUM_AUTO 26
+static float AMangle[NUM_AUTO];
+static float AMdeltaAngle[NUM_AUTO] = { 0 };
+static float AMradius[NUM_AUTO];
+
+void controlInitAutoMove(void) {
+    for(int i=0;i<NUM_AUTO;++i) {
+        AMdeltaAngle[i] = rndF(0.001,0.01);
+        AMradius[i] = 0.0001 + rndF(0.0001,0.0005);
+    }
+}
+
+#define pi2 ((float)(3.141592654 * 2.0))
+    
+void controlAutoMove(void) {
+    int index = 0;
+    for(int i=0;i<NUM_AUTO;++i) {
+        AMangle[i] += AMdeltaAngle[i];
+        if(AMangle[i] >= pi2) AMangle[i] -= pi2;
+        
+        float amt = sinf(AMangle[i]) * AMradius[i];
+        
+        switch(i) {
+            case 0 : cPtr->multiplier += amt;   break;
+            case 1 : cPtr->stripeDensity += amt;   break;
+            case 2 : cPtr->escapeRadius += amt;   break;
+            case 3 : cPtr->R += amt;   break;
+            case 4 : cPtr->G += amt;   break;
+            case 5 : cPtr->B += amt;   break;
+            case 6 :
+            case 11:
+            case 16:
+            case 21:
+                index = (i-6)/5;
+                cPtr->function[index].xT += amt; break;
+            case 7 :
+            case 12:
+            case 17:
+            case 22:
+                index = (i-7)/5;
+                cPtr->function[index].yT += amt; break;
+            case 8 :
+            case 13:
+            case 18:
+            case 23:
+                index = (i-8)/5;
+                cPtr->function[index].xS += amt; break;
+            case 9 :
+            case 14:
+            case 19:
+            case 24:
+                index = (i-9)/5;
+                cPtr->function[index].yS += amt; break;
+            case 10:
+            case 15:
+            case 20:
+            case 25:
+                index = (i-10)/5;
+                cPtr->function[index].rot += amt; break;
+        }
+    }
+}
+
+
     
     
     

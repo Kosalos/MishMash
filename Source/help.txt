@@ -58,3 +58,13 @@ O. Zoom : Zoom into the fractal.
 P. Rnd G : Randomize just the grammar string
 Q. Res :  Toggle hi / low resolution
 
+R. "A"  Toggle autoMove.  Widget values are all swept around
+   by small, slow sine waves.
+   Each time you turn this 'On' the speed and radius
+   of each sine wave is randomized.
+
+S. "E"  Email image.  Got any friends? (I don't).
+   You can email them the parameters for the current image to their MishMash app.
+
+
+
