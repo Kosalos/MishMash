@@ -13,13 +13,15 @@ class SaveLoadCell: UITableViewCell {
 //MARK:-
 
 let versionNumber:Int32 = 0x55aa
+let numEntries:Int = 50
+var loadNextIndex:Int = -1   // first use will bump this to zero
 
 class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,SLCellDelegate {
     var cc = Control()
     @IBOutlet var tableView: UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 50 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return numEntries }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SLCell", for: indexPath) as! SaveLoadCell
@@ -137,6 +139,30 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
     func loadAndDismissDialog(_ index:Int, _ cc: inout Control) {
         loadData(index,&cc,true)
         self.dismiss(animated: false, completion: {()->Void in vc.loadedData() })
+    }
+    
+    //MARK:-
+    
+    func loadNext() {
+        var numTries:Int = 0
+        
+        while true {
+            loadNextIndex += 1
+            if loadNextIndex >= numEntries { loadNextIndex = 0 }
+            
+            determineURL(loadNextIndex)
+            let data = NSData(contentsOf: fileURL)
+            
+            if data != nil {
+                data?.getBytes(&control, length:sz)
+                vc.loadedData()
+                Swift.print("Loaded (base 0): ",loadNextIndex.description)
+                return
+            }
+            
+            numTries += 1       // nothing found?
+            if numTries >= numEntries-1 { return }
+        }
     }
 }
 

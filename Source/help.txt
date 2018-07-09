@@ -49,8 +49,6 @@ J. Shadow  are two effects I added myself.
 K. Random  randommly select all data fields.
    Keep clicking until you come across a configuration that produces an image..
 
-   "E" button launches Send EMail popup
-
 L. Color R,G,B  affect the relative coloring
 M. Launch the Save/Load dialog.
 N. Move : Scroll the image in X/Y.
@@ -66,5 +64,5 @@ R. "A"  Toggle autoMove.  Widget values are all swept around
 S. "E"  Email image.  Got any friends? (I don't).
    You can email them the parameters for the current image to their MishMash app.
 
-
+T. Load the next saved image (round-robin).
 

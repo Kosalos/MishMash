@@ -32,7 +32,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079884101" green="0.27447522079884101" blue="0.27447522079884101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Save/Load">
+                                        <state key="normal" title="Sv/Ld">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -206,6 +206,18 @@
                                             <action selector="autoButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I63-P2-2TB"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWf-xQ-6in" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
+                                        <rect key="frame" x="53" y="25" width="120" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Nxt">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadNextButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="d9Q-Ve-xRN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -226,6 +238,7 @@
                         <outlet property="g4" destination="RAk-sK-pEp" id="E3E-MM-rSc"/>
                         <outlet property="grammarButton" destination="5Xr-rl-Xpn" id="hVm-BS-0ms"/>
                         <outlet property="helpButton" destination="gUW-2t-ZIx" id="MIj-05-rc9"/>
+                        <outlet property="loadNextButton" destination="zWf-xQ-6in" id="KQO-vG-yLV"/>
                         <outlet property="metalTextureView" destination="3se-qz-xqx" id="efg-UG-X9a"/>
                         <outlet property="randomButton" destination="0JJ-JP-6kn" id="WeR-qL-LIr"/>
                         <outlet property="resButton" destination="6lI-Rq-Ly2" id="tUL-GY-Azx"/>

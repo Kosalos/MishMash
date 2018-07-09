@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     @IBOutlet var cZoom: CZoom!
     @IBOutlet var metalTextureView: MetalTextureView!
     @IBOutlet var saveLoadButton: UIButton!
+    @IBOutlet var loadNextButton: UIButton!
     @IBOutlet var helpButton: UIButton!
     @IBOutlet var shadowButton: UIButton!
     @IBOutlet var grammarButton: UIButton!
@@ -56,6 +57,11 @@ class ViewController: UIViewController {
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
 
+    @IBAction func loadNextButtonPressed(_ sender: UIButton) {
+        let ss = SaveLoadViewController()
+        ss.loadNext()
+    }
+    
     @IBAction func autoButtonPressed(_ sender: UIButton) {
         autoMoveFlag = !autoMoveFlag
         if autoMoveFlag { controlInitAutoMove() }
@@ -314,11 +320,13 @@ class ViewController: UIViewController {
         emailButton.frame = frame(cxs*1/3-3,bys,cxs*1/3,0)
         randomButton.frame = frame(cxs*2/3,bys,0,gap)
         x = gxs + cxs + 15
-        let t3List = [ sR,sG,sB,saveLoadButton ] as [UIView]
+        let t3List = [ sR,sG,sB ] as [UIView]
         for t in t3List { t.frame = frame(cxs,bys,0,gap) }
-        
-        x += 55
-        y += 10
+        saveLoadButton.frame = frame(cxs*2/3-3,bys,cxs*2/3,0)
+        loadNextButton.frame = frame(cxs*1/3,bys,0,gap)
+
+        x -= 10
+        y += 12
         helpButton.frame = frame(bys,bys,0,0)
         
         setImageViewResolutionAndThreadGroups()
