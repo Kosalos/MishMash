@@ -20,8 +20,7 @@ That cycle count is used to determine the color for that single pixel.
 
 Collection of algorithms and UX from several other fractal apps,\
 hoping to come with a new and interesting display.\
-Jury is still out:  work in progress.\
-Not really a fractal either. 
+This is my new most favorite app.  Best 2D modern art!
 
 ![Screenshot](screenshot.png)
 
