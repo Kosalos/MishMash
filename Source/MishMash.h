@@ -30,7 +30,9 @@ typedef struct {
     Function function[NUM_FUNCTION];
     
     float height;
-    float future[9];
+    int smooth;
+    int zoom;
+    float future[8];
 } Control;
 
 // Swift access to arrays in Control

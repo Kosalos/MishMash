@@ -75,6 +75,8 @@ W. Stereo :
    With the iPad held two feet away, slightly cross your eyes so that there
    is a third image in the middle.
    Relax your gaze, and concentrate only on that middle image, which is in 3D.
+X. S# :  Smoothing amount, 0..4
+Y. Z# :  Zoom amount, 0..2
 
 
 

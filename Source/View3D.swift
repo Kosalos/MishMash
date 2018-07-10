@@ -6,6 +6,7 @@ let NUMNODE:Int = SIZE3D * SIZE3D
 
 var height:Float = 10
 var vBuffer: MTLBuffer?
+var vBuffer2: MTLBuffer?
 
 class View3D {
     var iBufferT: MTLBuffer?
@@ -53,13 +54,20 @@ class View3D {
         }
         
         vBuffer  = gDevice?.makeBuffer(bytes: vData,  length: vSize, options: MTLResourceOptions())
+        vBuffer2 = gDevice?.makeBuffer(bytes: vData,  length: vSize, options: MTLResourceOptions())
         iBufferT = gDevice?.makeBuffer(bytes: iDataT, length: iDataT.count * MemoryLayout<UInt16>.size,  options: MTLResourceOptions())
     }
     
     func render(_ renderEncoder:MTLRenderCommandEncoder) {
         if vData.count == 0 { return }
         
-        renderEncoder.setVertexBuffer(vBuffer, offset: 0, index: 0)
+        if (control.smooth & 1) == 0 {
+            renderEncoder.setVertexBuffer(vBuffer, offset: 0, index: 0)
+        }
+        else {
+            renderEncoder.setVertexBuffer(vBuffer2, offset: 0, index: 0)
+        }
+        
         renderEncoder.drawIndexedPrimitives(type: .triangle,  indexCount: iDataT.count, indexType: MTLIndexType.uint16, indexBuffer: iBufferT!, indexBufferOffset:0)
     }
 }

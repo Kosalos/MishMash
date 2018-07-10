@@ -15,8 +15,7 @@ var constants: [MTLBuffer] = []
 var constantsSize: Int = MemoryLayout<ConstantData>.stride
 var constantsIndex: Int = 0
 let kInFlightCommandBuffers = 3
-var translation = float3(0,0,40) // zorro 20)
-
+var translation = float3(0,0,40)
 var lightpos:float3 = float3()
 var lAngle:Float = 0
 

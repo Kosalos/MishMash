@@ -53,6 +53,9 @@ void controlRandom(void) {
     cPtr->G = rndF(0.1,1);
     cPtr->B = rndF(0.1,1);
     cPtr->contrast = rndF(0.1,5);
+    
+    cPtr->smooth = 0;
+    cPtr->zoom = 0;
 }
 
 char *controlDebugString(void) {

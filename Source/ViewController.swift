@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     var pipeline1: MTLComputePipelineState!
     var pipeline2: MTLComputePipelineState!
     var pipeline3: MTLComputePipelineState!
+    var pipeline4: MTLComputePipelineState!
+    var pipeline5: MTLComputePipelineState!
     lazy var device: MTLDevice! = MTLCreateSystemDefaultDevice()
     lazy var commandQueue: MTLCommandQueue! = { return self.device.makeCommandQueue() }()
     var shadowFlag:Bool = false
@@ -53,6 +55,8 @@ class ViewController: UIViewController {
     @IBOutlet var autoButton: UIButton!
     @IBOutlet var is3DButton: UIButton!
     @IBOutlet var isStereoButton: UIButton!
+    @IBOutlet var smoothButton: UIButton!
+    @IBOutlet var zoomButton: UIButton!
     @IBOutlet var sHeight: Widget!
     @IBOutlet var sStripeDensity: Widget!
     @IBOutlet var sEscapeRadius: Widget!
@@ -65,6 +69,18 @@ class ViewController: UIViewController {
     @IBOutlet var g2: GroupView!
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
+
+    @IBAction func smoothButtonPressed(_ sender: UIButton) {
+        control.smooth += 1
+        if control.smooth > 4 { control.smooth = 0 }
+        refresh()
+    }
+
+    @IBAction func zoomButtonPressed(_ sender: UIButton) {
+        control.zoom += 1
+        if control.zoom > 2 { control.zoom = 0 }
+        refresh()
+    }
 
     @IBAction func is3DButtonPressed(_ sender: UIButton) {
         is3D = !is3D
@@ -82,6 +98,9 @@ class ViewController: UIViewController {
     @IBAction func loadNextButtonPressed(_ sender: UIButton) {
         let ss = SaveLoadViewController()
         ss.loadNext()
+        setImageViewResolutionAndThreadGroups()
+        initRenderViews()
+        refresh()
     }
     
     @IBAction func autoButtonPressed(_ sender: UIButton) {
@@ -111,6 +130,8 @@ class ViewController: UIViewController {
     
     @IBAction func randomButtonPressed(_ sender: UIButton) { randomize() }
     
+    //MARK: -
+    
     func updateWidgets() {
         shadowButton.backgroundColor = shadowFlag ? bsOn : bsOff
         resButton.backgroundColor = hiResFlag ? bsOn : bsOff
@@ -119,6 +140,9 @@ class ViewController: UIViewController {
         isStereoButton.backgroundColor = isStereo ? bsOn : bsOff
         for i in 0 ..< gList.count { gList[i].refresh(isFunctionActive(Int32(i)) > 0) }
         for i in wList { i.setNeedsDisplay() }
+        
+        smoothButton.setTitle(String(format:"S%d",Int(control.smooth)), for: .normal)
+        zoomButton.setTitle(String(format:"Z%d",Int(control.zoom)), for: .normal)
     }
     
     @IBAction func shadowChanged(_ sender: UIButton) {
@@ -179,6 +203,12 @@ class ViewController: UIViewController {
             
             guard let kf3 = defaultLibrary.makeFunction(name: "heightMapShader")  else { fatalError() }
             pipeline3 = try device.makeComputePipelineState(function: kf3)
+
+            guard let kf4 = defaultLibrary.makeFunction(name: "smoothingShader")  else { fatalError() }
+            pipeline4 = try device.makeComputePipelineState(function: kf4)
+            
+            guard let kf5 = defaultLibrary.makeFunction(name: "edgeShader")  else { fatalError() }
+            pipeline5 = try device.makeComputePipelineState(function: kf5)
         }
         catch { fatalError("error creating pipelines") }
         
@@ -205,12 +235,16 @@ class ViewController: UIViewController {
             
             sHeight.isHidden = true
             isStereoButton.isHidden = true
+            smoothButton.isHidden = true
+            zoomButton.isHidden = true
         }
         else {
             d2View.isHidden = true
             d3ViewL.isHidden = false
             sHeight.isHidden = false
             isStereoButton.isHidden = false
+            smoothButton.isHidden = false
+            zoomButton.isHidden = false
 
             var vr = self.view.bounds
             d3ViewL.frame = vr
@@ -423,10 +457,14 @@ class ViewController: UIViewController {
 
         x += cxs + 5
         y = 5
-        let t4List = [ randomButton,saveLoadButton,is3DButton,sHeight,isStereoButton] as [UIView]
+        let t4List = [ randomButton,saveLoadButton,is3DButton,sHeight] as [UIView]
         for t in t4List { t.frame = frame(cxs,bys,0,gap) }
-
-        x += 35
+        smoothButton.frame = frame(cxs/2-3,bys,cxs/2,0)
+        zoomButton.frame = frame(cxs/2,bys,0,gap)
+        x -= cxs/2
+        isStereoButton.frame = frame(cxs,bys,0,0)
+    
+        x -= 52
         y += 12
         helpButton.frame = frame(bys,bys,0,0)
         
@@ -556,6 +594,8 @@ class ViewController: UIViewController {
     }
     
     func update3DRendition() {
+        // set height and color given 2D image
+        do {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
         
@@ -565,9 +605,55 @@ class ViewController: UIViewController {
         commandEncoder.setBuffer(controlBuffer, offset: 0, index: 1)
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         commandEncoder.endEncoding()
-        
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
+        }
+        
+        // apply smoothing
+        if control.smooth > 0 {
+            for i in 0 ..< control.smooth {
+                let commandBuffer = commandQueue.makeCommandBuffer()!
+                let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+                
+                commandEncoder.setComputePipelineState(pipeline4)
+                
+                if (i & 1) == 0 {
+                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 0)
+                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 1)
+                }
+                else {
+                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 0)
+                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 1)
+                }
+
+                commandEncoder.setBuffer(controlBuffer, offset: 0, index: 2)
+                commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+                commandEncoder.endEncoding()
+                commandBuffer.commit()
+                commandBuffer.waitUntilCompleted()
+                
+                // clean up edges after smoothing session
+                do {
+                    let commandBuffer = commandQueue.makeCommandBuffer()!
+                    let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+                    
+                    commandEncoder.setComputePipelineState(pipeline5)
+                    
+                    if (i & 1) == 0 {
+                        commandEncoder.setBuffer(vBuffer2, offset: 0, index: 0)
+                    }
+                    else {
+                        commandEncoder.setBuffer(vBuffer,  offset: 0, index: 0)
+                    }
+                    
+                    commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+                    commandEncoder.endEncoding()
+                    commandBuffer.commit()
+                    commandBuffer.waitUntilCompleted()
+                }
+            }
+        }
+        
         isBusy = false
     }
 
