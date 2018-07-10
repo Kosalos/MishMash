@@ -156,7 +156,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
             if data != nil {
                 data?.getBytes(&control, length:sz)
                 vc.loadedData()
-                Swift.print("Loaded (base 0): ",loadNextIndex.description)
+                //Swift.print("Loaded (base 0): ",loadNextIndex.description)
                 return
             }
             

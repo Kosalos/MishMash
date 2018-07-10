@@ -53,7 +53,7 @@ class MetalTextureView: MTKView,MTKViewDelegate {
     }
     
     @objc func handleTap2(_ sender: UITapGestureRecognizer) {
-        vc.background.isHidden = !vc.background.isHidden
+        vc.widgetBackground.isHidden = !vc.widgetBackground.isHidden
     }
 
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {

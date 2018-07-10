@@ -1,8 +1,7 @@
 MishMash Fractal
 Collection of algorithms and UX from several other fractal apps,
 hoping to come with a new and interesting display.
-Jury is still out:  work in progress.
-Not really a fractal either. 
+My new most favorite app.
 
 The control widgets all work the same way:
 * Press and hold to either side of center to affect
@@ -17,6 +16,8 @@ The widgets' Fast vs Slow edit style affects the movements.
 
 Note: Double tap the image to toggle the control panel visibility.
 Note: Pinch the image to control zoom.
+Note: in 3D mode, pan with 2 fingers to rotate the image.
+      Single tap the image to stop the rotation.
 
 A. The app Flam3 uses a weighted random function to select which
    algorithm is used every cycle.
@@ -52,17 +53,29 @@ K. Random  randommly select all data fields.
 L. Color R,G,B  affect the relative coloring
 M. Launch the Save/Load dialog.
 N. Move : Scroll the image in X/Y.
-O. Zoom : Zoom into the fractal.
+O. Zoom : Zoom into the fractal. You can also Pinch the image to Zoom.
 P. Rnd G : Randomize just the grammar string
 Q. Res :  Toggle hi / low resolution
+   Existing Bug: is Hi Res mode, sometimes the 3D rotation gesture doesn't work.
 
-R. "A"  Toggle autoMove.  Widget values are all swept around
-   by small, slow sine waves.
+R. "Auto"  Toggle autoMove.
+   Widget values are all swept around by small, slow sine waves.
    Each time you turn this 'On' the speed and radius
    of each sine wave is randomized.
 
-S. "E"  Email image.  Got any friends? (I don't).
+S. "Email"  Email image.  Got any friends? (I don't).
    You can email them the parameters for the current image to their MishMash app.
 
 T. Load the next saved image (round-robin).
+
+U. 3D : Toggle 3D view on/off.  Sorry, but 3D view is only 256x256 pixels.
+V. Height : Adjust the height of each 3D pixel.
+W. Stereo :
+   Image is rendered twice, for 'cross-eyed' 3D viewing.
+   With the iPad held two feet away, slightly cross your eyes so that there
+   is a third image in the middle.
+   Relax your gaze, and concentrate only on that middle image, which is in 3D.
+
+
+
 

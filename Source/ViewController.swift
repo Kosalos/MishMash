@@ -1,40 +1,46 @@
 import UIKit
 import Metal
+import MetalKit
 import simd
-
-let kludgeAutoLayout:Bool = false
-let scrnSz:[CGPoint] = [ CGPoint(x:768,y:1024), CGPoint(x:834,y:1112), CGPoint(x:1024,y:1366) ] // portrait
-let scrnIndex = 0
-let scrnLandscape:Bool = false
 
 var control = Control()
 var vc:ViewController! = nil
 var wList:[Widget]! = nil
 
+let view3D = View3D()
+var is3D:Bool = false
+
 let bsOff = UIColor(red:0.25, green:0.25, blue:0.25, alpha: 1)
 let bsOn  = UIColor(red:0.1, green:0.3, blue:0.1, alpha: 1)
 
 class ViewController: UIViewController {
+    var rendererL: Renderer!
+    var rendererR: Renderer!
     var controlBuffer:MTLBuffer! = nil
     var colorBuffer:MTLBuffer! = nil
     var texture1: MTLTexture!
     var texture2: MTLTexture!
     var pipeline1: MTLComputePipelineState!
     var pipeline2: MTLComputePipelineState!
+    var pipeline3: MTLComputePipelineState!
     lazy var device: MTLDevice! = MTLCreateSystemDefaultDevice()
     lazy var commandQueue: MTLCommandQueue! = { return self.device.makeCommandQueue() }()
     var shadowFlag:Bool = false
     var hiResFlag:Bool = false
     var autoMoveFlag:Bool = false
     var gList:[GroupView]! = nil
+    var isStereo:Bool = false
+    
+    @IBOutlet var d2View: MetalTextureView!
+    @IBOutlet var d3ViewL: MTKView!
+    @IBOutlet var d3ViewR: MTKView!
+    @IBOutlet var widgetBackground: Background!
     
     let threadGroupCount = MTLSizeMake(20,20,1)
     var threadGroups = MTLSize()
     
-    @IBOutlet var background: Background!
     @IBOutlet var cMove: CMove!
     @IBOutlet var cZoom: CZoom!
-    @IBOutlet var metalTextureView: MetalTextureView!
     @IBOutlet var saveLoadButton: UIButton!
     @IBOutlet var loadNextButton: UIButton!
     @IBOutlet var helpButton: UIButton!
@@ -45,6 +51,9 @@ class ViewController: UIViewController {
     @IBOutlet var resButton: UIButton!
     @IBOutlet var emailButton: UIButton!
     @IBOutlet var autoButton: UIButton!
+    @IBOutlet var is3DButton: UIButton!
+    @IBOutlet var isStereoButton: UIButton!
+    @IBOutlet var sHeight: Widget!
     @IBOutlet var sStripeDensity: Widget!
     @IBOutlet var sEscapeRadius: Widget!
     @IBOutlet var sMultiplier: Widget!
@@ -56,6 +65,19 @@ class ViewController: UIViewController {
     @IBOutlet var g2: GroupView!
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
+
+    @IBAction func is3DButtonPressed(_ sender: UIButton) {
+        is3D = !is3D
+        initRenderViews()
+        refresh()
+    }
+    
+    @IBAction func isStereoButtonPressed(_ sender: UIButton) {
+        isStereo = !isStereo
+        setImageViewResolutionAndThreadGroups()
+        initRenderViews()
+        refresh()
+    }
 
     @IBAction func loadNextButtonPressed(_ sender: UIButton) {
         let ss = SaveLoadViewController()
@@ -78,7 +100,13 @@ class ViewController: UIViewController {
     @IBAction func resButtonPressed(_ sender: UIButton) {
         hiResFlag = !hiResFlag
         setImageViewResolutionAndThreadGroups()
+        initRenderViews()
         refresh()
+        
+        if hiResFlag && is3D && isStereo {
+            let hk = d3ViewL.bounds
+            arcBall.initialize(Float(hk.size.width*2),Float(hk.size.height*2))
+        }
     }
     
     @IBAction func randomButtonPressed(_ sender: UIButton) { randomize() }
@@ -87,13 +115,15 @@ class ViewController: UIViewController {
         shadowButton.backgroundColor = shadowFlag ? bsOn : bsOff
         resButton.backgroundColor = hiResFlag ? bsOn : bsOff
         autoButton.backgroundColor = autoMoveFlag ? bsOn : bsOff
+        is3DButton.backgroundColor = is3D ? bsOn : bsOff
+        isStereoButton.backgroundColor = isStereo ? bsOn : bsOff
         for i in 0 ..< gList.count { gList[i].refresh(isFunctionActive(Int32(i)) > 0) }
         for i in wList { i.setNeedsDisplay() }
     }
     
     @IBAction func shadowChanged(_ sender: UIButton) {
         shadowFlag = !shadowFlag
-        metalTextureView.initialize(shadowFlag ? texture2 : texture1)
+        d2View.initialize(shadowFlag ? texture2 : texture1)
         refresh()
     }
     
@@ -106,18 +136,39 @@ class ViewController: UIViewController {
         vc = self
         setControlPointer(&control);
         
-        wList = [ sStripeDensity,sEscapeRadius,sMultiplier,sR,sG,sB,sContrast ] as! [Widget]
+        wList = [ sStripeDensity,sEscapeRadius,sMultiplier,sR,sG,sB,sContrast,sHeight] as! [Widget]
         gList = [ g1,g2,g3,g4 ]
         for i in 0 ..< gList.count { gList[i].initialize(i) }
         
         sStripeDensity.initSingle(&control.stripeDensity, -10,10,2, "Stripe")
         sEscapeRadius.initSingle(&control.escapeRadius, 0.01,80,3, "Escape")
-        sMultiplier.initSingle(&control.multiplier, -1,1,0.1, "Mult")
+        sMultiplier.initSingle(&control.multiplier, -1,1,0.1, "Multiplier")
         sR.initSingle(&control.R, 0,1,0.15, "Color R")
         sG.initSingle(&control.G, 0,1,0.15, "Color G")
         sB.initSingle(&control.B, 0,1,0.15, "Color B")
         sContrast.initSingle(&control.contrast, 0.1,5,0.5, "Contrast")
         
+        sHeight.initSingle(&control.height,-40,40,4, "Height")
+        sHeight.highlight(0)
+
+        gDevice = MTLCreateSystemDefaultDevice()
+        
+        initRenderViews()
+        view3D.initialize()
+        
+        d3ViewL.device = gDevice
+        d3ViewR.device = gDevice
+
+        guard let newRenderer = Renderer(metalKitView: d3ViewL, 0) else { fatalError("Renderer cannot be initialized") }
+        rendererL = newRenderer
+        rendererL.mtkView(d3ViewL, drawableSizeWillChange: d3ViewL.drawableSize)
+        d3ViewL.delegate = rendererL
+        
+        guard let newRenderer2 = Renderer(metalKitView: d3ViewR, 1) else { fatalError("Renderer cannot be initialized") }
+        rendererR = newRenderer2
+        rendererR.mtkView(d3ViewR, drawableSizeWillChange: d3ViewR.drawableSize)
+        d3ViewR.delegate = rendererR
+
         do {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
             guard let kf1 = defaultLibrary.makeFunction(name: "fractalShader")  else { fatalError() }
@@ -125,6 +176,9 @@ class ViewController: UIViewController {
             
             guard let kf2 = defaultLibrary.makeFunction(name: "shadowShader")  else { fatalError() }
             pipeline2 = try device.makeComputePipelineState(function: kf2)
+            
+            guard let kf3 = defaultLibrary.makeFunction(name: "heightMapShader")  else { fatalError() }
+            pipeline3 = try device.makeComputePipelineState(function: kf3)
         }
         catch { fatalError("error creating pipelines") }
         
@@ -136,10 +190,48 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Timer.scheduledTimer(withTimeInterval:0.02, repeats:true) { timer in self.timerHandler() }
+        Timer.scheduledTimer(withTimeInterval:0.05, repeats:true) { timer in self.timerHandler() }
         randomize()
         
         if remoteLaunchOptionsLoad() { Timer.scheduledTimer(withTimeInterval:1, repeats:false) { timer in self.timerKick() }}
+    }
+    
+    func initRenderViews() {
+        if !is3D {
+            d2View.isHidden = false
+            d3ViewL.isHidden = true
+            d3ViewR.isHidden = true
+            d2View.frame = self.view.bounds
+            
+            sHeight.isHidden = true
+            isStereoButton.isHidden = true
+        }
+        else {
+            d2View.isHidden = true
+            d3ViewL.isHidden = false
+            sHeight.isHidden = false
+            isStereoButton.isHidden = false
+
+            var vr = self.view.bounds
+            d3ViewL.frame = vr
+
+            if isStereo {
+                vr.size.width /= 2 
+                d3ViewL.frame = vr
+
+                d3ViewR.isHidden = false
+                vr.origin.x += vr.width
+                d3ViewR.frame = vr
+            }
+            else {
+                d3ViewR.isHidden = true
+            }
+            
+            let hk = d3ViewL.bounds
+            arcBall.initialize(Float(hk.size.width),Float(hk.size.height))            
+        }
+        
+        view.bringSubview(toFront: widgetBackground)
     }
     
     //MARK: -
@@ -198,6 +290,8 @@ class ViewController: UIViewController {
     //MARK: -
 
     @objc func timerHandler() {
+        if isBusy { return }
+        
         var refresh:Bool = false
         for i in wList { if i.update() { refresh = true }}
         if cMove.update() { refresh = true }
@@ -210,6 +304,10 @@ class ViewController: UIViewController {
         }
         
         if refresh { updateImage() }
+        
+        if is3D {
+            rotate(paceRotate.x,paceRotate.y)
+        }
     }
     
     //MARK: -
@@ -291,10 +389,10 @@ class ViewController: UIViewController {
             return r
         }
         
-        metalTextureView.frame = view.bounds
-        let bkxs:CGFloat = 505
+        d2View.frame = view.bounds
+        let bkxs:CGFloat = 610
         let bkys:CGFloat = 270
-        background.frame = CGRect(x:(vxs-bkxs)/2, y:vys-bkys-20, width:bkxs, height:bkys)
+        widgetBackground.frame = CGRect(x:(vxs-bkxs)/2, y:vys-bkys-20, width:bkxs, height:bkys)
         
         x = 5
         y = 5
@@ -307,29 +405,33 @@ class ViewController: UIViewController {
         
         x = 10 + gxs
         y = 5
-        sMultiplier.frame = frame(cxs*2/3-3,bys,cxs*2/3,0)
-        autoButton.frame = frame(cxs*1/3,bys,0,gap)
+        sMultiplier.frame = frame(cxs,bys,cxs+5,0)
+        autoButton.frame = frame(cxs/2-3,bys,cxs/2,0)
+        emailButton.frame = frame(cxs/2,bys,0,0)
+
         x = 10 + gxs
+        y += gap
         let t2List = [ sEscapeRadius,sStripeDensity,sContrast,shadowButton ] as [UIView]
         for t in t2List { t.frame = frame(cxs,bys,0,gap) }
         cMove.frame = frame(70,60,75,0)
         cZoom.frame = frame(70,60,0,0)
         
         x = gxs + cxs + 15
-        y = 5
-        emailButton.frame = frame(cxs*1/3-3,bys,cxs*1/3,0)
-        randomButton.frame = frame(cxs*2/3,bys,0,gap)
-        x = gxs + cxs + 15
-        let t3List = [ sR,sG,sB ] as [UIView]
+        y = gap + 5
+        let t3List = [ sR,sG,sB,loadNextButton ] as [UIView]
         for t in t3List { t.frame = frame(cxs,bys,0,gap) }
-        saveLoadButton.frame = frame(cxs*2/3-3,bys,cxs*2/3,0)
-        loadNextButton.frame = frame(cxs*1/3,bys,0,gap)
 
-        x -= 10
+        x += cxs + 5
+        y = 5
+        let t4List = [ randomButton,saveLoadButton,is3DButton,sHeight,isStereoButton] as [UIView]
+        for t in t4List { t.frame = frame(cxs,bys,0,gap) }
+
+        x += 35
         y += 12
         helpButton.frame = frame(bys,bys,0,0)
         
         setImageViewResolutionAndThreadGroups()
+        initRenderViews()
     }
     
     //MARK: -
@@ -349,7 +451,7 @@ class ViewController: UIViewController {
         texture1 = self.device.makeTexture(descriptor: textureDescriptor)!
         texture2 = self.device.makeTexture(descriptor: textureDescriptor)!
         
-        metalTextureView.initialize(texture1)
+        d2View.initialize(texture1)
         
         let maxsz = max(xsz,ysz) + Int(threadGroupCount.width-1)
         threadGroups = MTLSizeMake(
@@ -433,7 +535,7 @@ class ViewController: UIViewController {
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
     }
-    
+
     //MARK: -
     
     var isBusy:Bool = false
@@ -442,8 +544,89 @@ class ViewController: UIViewController {
         if !isBusy {
             isBusy = true
             calcFractal()
-            metalTextureView.display(metalTextureView.layer)
-            isBusy = false
+            
+            if !is3D {
+                d2View.display(d2View.layer)
+                isBusy = false
+            }
+            else {
+                update3DRendition()
+            }
         }
     }
+    
+    func update3DRendition() {
+        let commandBuffer = commandQueue.makeCommandBuffer()!
+        let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+        
+        commandEncoder.setComputePipelineState(pipeline3)
+        commandEncoder.setTexture(shadowFlag ? texture2 : texture1, index: 0)
+        commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
+        commandEncoder.setBuffer(controlBuffer, offset: 0, index: 1)
+        commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+        commandEncoder.endEncoding()
+        
+        commandBuffer.commit()
+        commandBuffer.waitUntilCompleted()
+        isBusy = false
+    }
+
+    //MARK:-
+    
+    var oldPt = CGPoint()
+    
+    @IBAction func panGesture(_ sender: UIPanGestureRecognizer) { // alter focused widget values
+        var pt = sender.translation(in: self.view)
+        
+        switch sender.state {
+        case .began :
+            oldPt = pt
+        case .changed :
+            pt.x -= oldPt.x
+            pt.y -= oldPt.y
+            vc.focusMovement(pt)
+        default :
+            pt.x = 0
+            pt.y = 0
+            vc.focusMovement(pt)
+        }
+    }
+
+    //MARK:-
+
+    var paceRotate = CGPoint()
+    
+    func rotate(_ x:CGFloat, _ y:CGFloat) {
+        let center = CGFloat(control.xSize / 2)
+        arcBall.mouseDown(CGPoint(x: center, y: center))
+        arcBall.mouseMove(CGPoint(x: center - x, y: center - y))
+    }
+    
+    @IBAction func pan2Gesture(_ sender: UIPanGestureRecognizer) { // rotate 3D image
+        let pt = sender.translation(in: self.view)
+        let scale:CGFloat = 0.05
+        paceRotate.x = pt.x * scale
+        paceRotate.y = pt.y * scale
+    }
+
+    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+        let min:Float = 1       // close
+        let max:Float = 1000    // far
+        
+        translation.z *= Float(1 + (1 - sender.scale) / 10 )
+        if translation.z < min { translation.z = min }
+        if translation.z > max { translation.z = max }
+    }
+    
+    //MARK:-
+
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        paceRotate.x = 0
+        paceRotate.y = 0
+    }
+
+    @IBAction func tap2Gesture(_ sender: UITapGestureRecognizer) {
+        widgetBackground.isHidden = !widgetBackground.isHidden
+    }
+
 }

@@ -19,20 +19,51 @@
                         <viewControllerLayoutGuide type="top" id="9sQ-bp-QHc"/>
                         <viewControllerLayoutGuide type="bottom" id="yDg-Pc-LEh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3se-qz-xqx" customClass="MetalTextureView" customModule="MishMash" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3se-qz-xqx" userLabel="View">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNb-sO-bl3" customClass="MetalTextureView" customModule="MishMash" customModuleProvider="target">
+                                <rect key="frame" x="474" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTc-Wh-ygZ" customClass="MTKView">
+                                <rect key="frame" x="474" y="99" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="XyV-Yl-0t0" appends="YES" id="XTI-Hz-yjM"/>
+                                    <outletCollection property="gestureRecognizers" destination="AfX-Ia-esd" appends="YES" id="ADQ-un-jev"/>
+                                    <outletCollection property="gestureRecognizers" destination="xfi-kQ-1xe" appends="YES" id="hr9-Tm-uiA"/>
+                                    <outletCollection property="gestureRecognizers" destination="YP9-Da-BA5" appends="YES" id="nwk-6a-c45"/>
+                                    <outletCollection property="gestureRecognizers" destination="eVe-tF-IK4" appends="YES" id="P7c-R7-7mq"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-O4-Si2" customClass="MTKView">
+                                <rect key="frame" x="474" y="157" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="veT-tx-7sJ" appends="YES" id="T4C-8r-UQw"/>
+                                    <outletCollection property="gestureRecognizers" destination="3sR-DU-Uaw" appends="YES" id="c4j-eP-X1J"/>
+                                    <outletCollection property="gestureRecognizers" destination="stW-kz-i15" appends="YES" id="x01-lt-CYN"/>
+                                    <outletCollection property="gestureRecognizers" destination="Ah0-8V-EaY" appends="YES" id="aET-v4-vIr"/>
+                                    <outletCollection property="gestureRecognizers" destination="4mN-Xm-OKN" appends="YES" id="EZi-vC-Lw0"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORw-f4-rFM" customClass="Background" customModule="MishMash" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="408" height="544"/>
+                                <rect key="frame" x="20" y="20" width="439" height="538"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeO-5k-4ZX" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="53" y="69" width="120" height="36"/>
+                                        <rect key="frame" x="23" y="52" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079884101" green="0.27447522079884101" blue="0.27447522079884101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Sv/Ld">
+                                        <state key="normal" title="Save/Load">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -42,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUW-2t-ZIx">
-                                        <rect key="frame" x="52" y="207" width="22" height="22"/>
+                                        <rect key="frame" x="22" y="190" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,7 +87,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiQ-P1-SOL" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="52" y="243" width="120" height="36"/>
+                                        <rect key="frame" x="22" y="226" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -68,7 +99,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xr-rl-Xpn" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="53" y="113" width="120" height="36"/>
+                                        <rect key="frame" x="23" y="96" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079884101" green="0.27447522079884101" blue="0.27447522079884101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -82,62 +113,62 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-X7-Qm9" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="39" y="378" width="60" height="32"/>
+                                        <rect key="frame" x="9" y="361" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P00-0O-R7D" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="39" y="418" width="60" height="32"/>
+                                        <rect key="frame" x="9" y="401" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVe-hA-FOv" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="39" y="337" width="60" height="32"/>
+                                        <rect key="frame" x="9" y="320" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8m-rW-sye" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="121" y="297" width="60" height="32"/>
+                                        <rect key="frame" x="91" y="280" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5a-9I-Rly" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="121" y="337" width="60" height="32"/>
+                                        <rect key="frame" x="91" y="320" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DC6-gd-udP" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="121" y="377" width="60" height="32"/>
+                                        <rect key="frame" x="91" y="360" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtC-WN-Vtg" customClass="Widget" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="121" y="417" width="60" height="32"/>
+                                        <rect key="frame" x="91" y="400" width="60" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-Zp-Xzw" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="104" width="50" height="50"/>
+                                        <rect key="frame" x="180" y="87" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6cQ-Uo-eB6" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="162" width="50" height="50"/>
+                                        <rect key="frame" x="180" y="145" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74l-qD-z5e" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="220" width="50" height="50"/>
+                                        <rect key="frame" x="180" y="203" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAk-sK-pEp" customClass="GroupView" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="278" width="50" height="50"/>
+                                        <rect key="frame" x="180" y="261" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-JP-6kn" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="52" y="157" width="120" height="36"/>
+                                        <rect key="frame" x="22" y="140" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -149,17 +180,17 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpJ-lS-0xe" customClass="CMove" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="38" y="476" width="50" height="50"/>
+                                        <rect key="frame" x="8" y="459" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Knj-8m-l8D" customClass="CZoom" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="96" y="476" width="50" height="50"/>
+                                        <rect key="frame" x="66" y="459" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giJ-OU-HaI" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="224" y="364" width="123" height="36"/>
+                                        <rect key="frame" x="165" y="319" width="123" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -171,7 +202,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lI-Rq-Ly2" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="224" y="408" width="120" height="36"/>
+                                        <rect key="frame" x="165" y="363" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -183,11 +214,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OsH-fJ-3up" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="224" y="452" width="120" height="36"/>
+                                        <rect key="frame" x="165" y="407" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="E">
+                                        <state key="normal" title="Email">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -195,11 +226,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBi-Gq-ZMj" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="224" y="496" width="120" height="36"/>
+                                        <rect key="frame" x="165" y="451" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="A">
+                                        <state key="normal" title="Auto">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -207,30 +238,61 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWf-xQ-6in" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
-                                        <rect key="frame" x="53" y="25" width="120" height="36"/>
+                                        <rect key="frame" x="23" y="8" width="120" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Nxt">
+                                        <state key="normal" title="Load Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="loadNextButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="d9Q-Ve-xRN"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XL9-Sr-FsP" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
+                                        <rect key="frame" x="288" y="25" width="123" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="3D">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="is3DButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="HMd-8h-dlz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCg-35-i2k" customClass="BorderedButton" customModule="MishMash" customModuleProvider="target">
+                                        <rect key="frame" x="288" y="69" width="123" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.27447522079999997" green="0.27447522079999997" blue="0.27447522079999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Stereo">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="isStereoButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="lSZ-zx-C7I"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-wv-fZO" customClass="Widget" customModule="MishMash" customModuleProvider="target">
+                                        <rect key="frame" x="288" y="113" width="60" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.026657605508461555" green="0.077108541822286741" blue="0.15452622898527923" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                     </view>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="autoButton" destination="zBi-Gq-ZMj" id="wu5-MS-YvL"/>
-                        <outlet property="background" destination="ORw-f4-rFM" id="uPu-eh-fyj"/>
                         <outlet property="cMove" destination="RpJ-lS-0xe" id="DSS-od-g0W"/>
                         <outlet property="cZoom" destination="Knj-8m-l8D" id="pdH-jd-SeB"/>
+                        <outlet property="d2View" destination="gNb-sO-bl3" id="0ME-th-UUt"/>
+                        <outlet property="d3ViewL" destination="eTc-Wh-ygZ" id="duQ-SI-RD2"/>
+                        <outlet property="d3ViewR" destination="Pwf-O4-Si2" id="H3h-Ox-7Cy"/>
                         <outlet property="emailButton" destination="OsH-fJ-3up" id="oIN-FJ-vS4"/>
                         <outlet property="g1" destination="Rwi-Zp-Xzw" id="5ii-X1-3Yt"/>
                         <outlet property="g2" destination="6cQ-Uo-eB6" id="HUF-KS-7e7"/>
@@ -238,8 +300,9 @@
                         <outlet property="g4" destination="RAk-sK-pEp" id="E3E-MM-rSc"/>
                         <outlet property="grammarButton" destination="5Xr-rl-Xpn" id="hVm-BS-0ms"/>
                         <outlet property="helpButton" destination="gUW-2t-ZIx" id="MIj-05-rc9"/>
+                        <outlet property="is3DButton" destination="XL9-Sr-FsP" id="bcm-Ee-hj7"/>
+                        <outlet property="isStereoButton" destination="yCg-35-i2k" id="K40-ir-yJI"/>
                         <outlet property="loadNextButton" destination="zWf-xQ-6in" id="KQO-vG-yLV"/>
-                        <outlet property="metalTextureView" destination="3se-qz-xqx" id="efg-UG-X9a"/>
                         <outlet property="randomButton" destination="0JJ-JP-6kn" id="WeR-qL-LIr"/>
                         <outlet property="resButton" destination="6lI-Rq-Ly2" id="tUL-GY-Azx"/>
                         <outlet property="rndGButton" destination="giJ-OU-HaI" id="w1Q-AO-fho"/>
@@ -247,19 +310,71 @@
                         <outlet property="sContrast" destination="xVe-hA-FOv" id="Mfd-d7-qKc"/>
                         <outlet property="sEscapeRadius" destination="P00-0O-R7D" id="OZn-ZX-ICp"/>
                         <outlet property="sG" destination="DC6-gd-udP" id="ras-Jz-aoT"/>
+                        <outlet property="sHeight" destination="Tal-wv-fZO" id="NrF-9O-yob"/>
                         <outlet property="sMultiplier" destination="q8m-rW-sye" id="r7c-u6-at6"/>
                         <outlet property="sR" destination="s5a-9I-Rly" id="zbs-d6-7TD"/>
                         <outlet property="sStripeDensity" destination="gyC-X7-Qm9" id="Qnb-Eu-aie"/>
                         <outlet property="saveLoadButton" destination="HeO-5k-4ZX" id="2lA-b6-kMi"/>
                         <outlet property="shadowButton" destination="DiQ-P1-SOL" id="74t-Nm-HYg"/>
+                        <outlet property="widgetBackground" destination="ORw-f4-rFM" id="uPu-eh-fyj"/>
                         <segue destination="HPx-jc-udr" kind="popoverPresentation" identifier="FListSegue" popoverAnchorView="ORw-f4-rFM" id="y4p-8j-PRO">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="XyV-Yl-0t0">
+                    <connections>
+                        <action selector="pinchGesture:" destination="BV1-FR-VrT" id="mI4-a4-qhz"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <pinchGestureRecognizer id="veT-tx-7sJ">
+                    <connections>
+                        <action selector="pinchGesture:" destination="BV1-FR-VrT" id="6Af-gV-zFW"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3sR-DU-Uaw">
+                    <connections>
+                        <action selector="panGesture:" destination="BV1-FR-VrT" id="p3P-d0-9QI"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="AfX-Ia-esd">
+                    <connections>
+                        <action selector="panGesture:" destination="BV1-FR-VrT" id="4WC-5p-tHY"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="xfi-kQ-1xe">
+                    <connections>
+                        <action selector="tapGesture:" destination="BV1-FR-VrT" id="Z90-of-dtP"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="stW-kz-i15">
+                    <connections>
+                        <action selector="tapGesture:" destination="BV1-FR-VrT" id="FSf-fP-Kw9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="YP9-Da-BA5">
+                    <connections>
+                        <action selector="tap2Gesture:" destination="BV1-FR-VrT" id="Ext-Iw-cbq"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Ah0-8V-EaY">
+                    <connections>
+                        <action selector="tap2Gesture:" destination="BV1-FR-VrT" id="X5p-yY-oTR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="2" id="eVe-tF-IK4">
+                    <connections>
+                        <action selector="pan2Gesture:" destination="BV1-FR-VrT" id="PzY-O6-IqH"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="2" id="4mN-Xm-OKN">
+                    <connections>
+                        <action selector="pan2Gesture:" destination="BV1-FR-VrT" id="FaK-TO-YlD"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1195.3125" y="-738.36017569546118"/>
+            <point key="canvasLocation" x="-1175" y="-746"/>
         </scene>
         <!--SaveLoadVC-->
         <scene sceneID="7cL-dd-aq2">
@@ -285,7 +400,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZq-6A-MRc">
-                                                    <rect key="frame" x="2" y="3" width="287" height="46.5"/>
+                                                    <rect key="frame" x="9" y="6" width="287" height="41"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="287" id="KyH-Hh-fWP"/>
@@ -298,7 +413,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-IT-ja3">
-                                                    <rect key="frame" x="297" y="3" width="68" height="46.5"/>
+                                                    <rect key="frame" x="304" y="6" width="54" height="41"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="Bc1-68-PZl"/>
@@ -665,6 +780,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="help" width="1003" height="534"/>
+        <image name="help" width="1001" height="531"/>
     </resources>
 </document>

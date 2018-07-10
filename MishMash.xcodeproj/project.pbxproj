@@ -22,6 +22,11 @@
 		1D38AE5C20E9529A0048F168 /* FunctionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D38AE5B20E9529A0048F168 /* FunctionListViewController.swift */; };
 		1D38AE5E20E952EE0048F168 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D38AE5D20E952EE0048F168 /* GroupView.swift */; };
 		1D38AE6120E956C20048F168 /* MishMash.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D38AE6020E956C10048F168 /* MishMash.m */; };
+		1D75605820F3DED5002DF246 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D75605620F3DED5002DF246 /* Renderer.swift */; };
+		1D75605A20F3DEEA002DF246 /* ArcBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D75605920F3DEE9002DF246 /* ArcBall.swift */; };
+		1D75605C20F3DFB7002DF246 /* AAPLTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D75605B20F3DFB7002DF246 /* AAPLTransforms.swift */; };
+		1D75605E20F3E0CE002DF246 /* View3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D75605D20F3E0CE002DF246 /* View3D.swift */; };
+		1D75606220F47D4C002DF246 /* Shaders3D.metal in Sources */ = {isa = PBXBuildFile; fileRef = 1D75606120F47D4C002DF246 /* Shaders3D.metal */; };
 		1D83DA3020EBE4D200747C0D /* MetalTextureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D83DA2E20EBE4D200747C0D /* MetalTextureView.swift */; };
 		1D83DA3120EBE4D200747C0D /* MetalTextureView.metal in Sources */ = {isa = PBXBuildFile; fileRef = 1D83DA2F20EBE4D200747C0D /* MetalTextureView.metal */; };
 		1DCAC5751FA349E6000E90E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCAC5731FA349E6000E90E8 /* Main.storyboard */; };
@@ -49,6 +54,11 @@
 		1D38AE5F20E956C10048F168 /* MishMash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MishMash.h; sourceTree = "<group>"; };
 		1D38AE6020E956C10048F168 /* MishMash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MishMash.m; sourceTree = "<group>"; };
 		1D594DC6206B17F900A7EB3A /* MandelBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBox.app; path = MishMash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D75605620F3DED5002DF246 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		1D75605920F3DEE9002DF246 /* ArcBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcBall.swift; sourceTree = "<group>"; };
+		1D75605B20F3DFB7002DF246 /* AAPLTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AAPLTransforms.swift; sourceTree = "<group>"; };
+		1D75605D20F3E0CE002DF246 /* View3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View3D.swift; sourceTree = "<group>"; };
+		1D75606120F47D4C002DF246 /* Shaders3D.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders3D.metal; sourceTree = "<group>"; };
 		1D83DA2E20EBE4D200747C0D /* MetalTextureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalTextureView.swift; sourceTree = "<group>"; };
 		1D83DA2F20EBE4D200747C0D /* MetalTextureView.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = MetalTextureView.metal; sourceTree = "<group>"; };
 		1DCAC5741FA349E6000E90E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,22 +97,27 @@
 			isa = PBXGroup;
 			children = (
 				1D1490671F9FA199004B538F /* ViewController.swift */,
-				1D38AE5D20E952EE0048F168 /* GroupView.swift */,
+				1D83DA2E20EBE4D200747C0D /* MetalTextureView.swift */,
+				1DCAC5731FA349E6000E90E8 /* Main.storyboard */,
 				1D38AE5F20E956C10048F168 /* MishMash.h */,
 				1D38AE6020E956C10048F168 /* MishMash.m */,
+				1D38AE5D20E952EE0048F168 /* GroupView.swift */,
 				1DD98917207917AF00B209A5 /* CMove.swift */,
 				1DD98918207917AF00B209A5 /* CZoom.swift */,
-				1DCAC5731FA349E6000E90E8 /* Main.storyboard */,
+				1D75605D20F3E0CE002DF246 /* View3D.swift */,
+				1D75605620F3DED5002DF246 /* Renderer.swift */,
 				1D1490691F9FA199004B538F /* Shaders.metal */,
-				1D1490641F9FA199004B538F /* ShaderTypes.h */,
+				1D75606120F47D4C002DF246 /* Shaders3D.metal */,
+				1D83DA2F20EBE4D200747C0D /* MetalTextureView.metal */,
 				1D38AE5520E93C050048F168 /* Widget.swift */,
+				1D1490641F9FA199004B538F /* ShaderTypes.h */,
 				1D38AE5720E941D30048F168 /* GrammarViewController.swift */,
 				1D38AE5B20E9529A0048F168 /* FunctionListViewController.swift */,
 				1D03ED102071A85900E72BC5 /* SaveLoadViewController.swift */,
 				1D03ED0C2071A80800E72BC5 /* HelpViewController.swift */,
 				1D38AE5320E938260048F168 /* BorderedButton.swift */,
-				1D83DA2F20EBE4D200747C0D /* MetalTextureView.metal */,
-				1D83DA2E20EBE4D200747C0D /* MetalTextureView.swift */,
+				1D75605920F3DEE9002DF246 /* ArcBall.swift */,
+				1D75605B20F3DFB7002DF246 /* AAPLTransforms.swift */,
 				1D38AE5920E947BF0048F168 /* Background.swift */,
 				1D1490621F9FA199004B538F /* AppDelegate.swift */,
 				1D14906E1F9FA199004B538F /* Assets.xcassets */,
@@ -191,17 +206,22 @@
 				1D38AE6120E956C20048F168 /* MishMash.m in Sources */,
 				1D38AE5420E938270048F168 /* BorderedButton.swift in Sources */,
 				1D38AE5E20E952EE0048F168 /* GroupView.swift in Sources */,
+				1D75605A20F3DEEA002DF246 /* ArcBall.swift in Sources */,
 				1D03ED0D2071A80800E72BC5 /* HelpViewController.swift in Sources */,
 				1DD98919207917B000B209A5 /* CMove.swift in Sources */,
 				1D38AE5820E941D30048F168 /* GrammarViewController.swift in Sources */,
+				1D75605E20F3E0CE002DF246 /* View3D.swift in Sources */,
 				1D03ED0B2070985300E72BC5 /* Shaders.metal in Sources */,
 				1D1490681F9FA199004B538F /* ViewController.swift in Sources */,
+				1D75606220F47D4C002DF246 /* Shaders3D.metal in Sources */,
 				1D1490631F9FA199004B538F /* AppDelegate.swift in Sources */,
 				1D38AE5620E93C050048F168 /* Widget.swift in Sources */,
 				1D83DA3120EBE4D200747C0D /* MetalTextureView.metal in Sources */,
 				1DD9891A207917B000B209A5 /* CZoom.swift in Sources */,
 				1D38AE5C20E9529A0048F168 /* FunctionListViewController.swift in Sources */,
+				1D75605C20F3DFB7002DF246 /* AAPLTransforms.swift in Sources */,
 				1D03ED112071A85900E72BC5 /* SaveLoadViewController.swift in Sources */,
+				1D75605820F3DED5002DF246 /* Renderer.swift in Sources */,
 				1D38AE5A20E947BF0048F168 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
