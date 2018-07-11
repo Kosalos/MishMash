@@ -1,8 +1,7 @@
 import UIKit
 import Metal
 
-let SIZE3D:Int = 256
-let NUMNODE:Int = SIZE3D * SIZE3D
+let NUMNODE:Int = Int(SIZE3D * SIZE3D)
 
 var height:Float = 10
 var vBuffer: MTLBuffer?
@@ -10,7 +9,7 @@ var vBuffer2: MTLBuffer?
 
 class View3D {
     var iBufferT: MTLBuffer?
-    var vData = Array(repeating:TVertex(), count:SIZE3D * SIZE3D)
+    var vData = Array(repeating:TVertex(), count:NUMNODE)
     var iDataT = Array<UInt16>()
     let vSize:Int = MemoryLayout<TVertex>.stride * NUMNODE
     
@@ -36,8 +35,8 @@ class View3D {
             }
         }
         
-        for y in 0 ..< SIZE3D-1 {
-            for x in 0 ..< SIZE3D-1 {
+        for y in 0 ..< SIZE3Dm {
+            for x in 0 ..< SIZE3Dm {
                 let p1 = UInt16(x + y * SIZE3D)
                 let p2 = UInt16(x + 1 + y * SIZE3D)
                 let p3 = UInt16(x + (y+1) * SIZE3D)

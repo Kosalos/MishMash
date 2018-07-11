@@ -21,7 +21,7 @@ kernel void fractalShader
     float z2 = 0;
     int gIndex = 0;
     int chr;
-    const int maxIter = 64;
+    const int maxIter = 32;
     
     for(iter = 0;iter < maxIter;++iter) {
         // round-robin function index from grammar string

@@ -4,6 +4,9 @@
 #define NUM_FUNCTION 4
 #define MAX_GRAMMER 12
 
+#define SIZE3D 256
+#define SIZE3Dm (SIZE3D - 1)
+
 typedef struct {
     int index;
     float xT,yT;

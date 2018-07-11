@@ -44,20 +44,20 @@ kernel void heightMapShader
  constant Control &control  [[ buffer(1) ]],
  uint2 p [[thread_position_in_grid]])
 {
-    if(p.x > 255 || p.y > 255) return; // threadCount mismatch
+    if(p.x > SIZE3Dm || p.y > SIZE3Dm) return; // threadCount mismatch
     
     int2 pp = int2(p);   // centered on source pixels
-    int size = 256;
+    int size = SIZE3D;
     switch(control.zoom) {
         case 0 :  // zoom in
             pp.x /= 2;
             pp.y /= 2;
-            size = 128;
+            size /= 2;
             break;
         case 2 :  // zoom out
             pp.x *= 2;
             pp.y *= 2;
-            size = 512;
+            size *= 2;
             break;
     }
     
@@ -67,7 +67,7 @@ kernel void heightMapShader
     float4 c = srcTexture.read(uint2(pp));
     float height = (c.x + c.y + c.z) * control.height / 3.0;
     
-    int index = int(255 - p.y) * 256 + int(p.x);
+    int index = int(SIZE3D - 1 - p.y) * SIZE3D + int(p.x);
     vData[index].pos.y = height;
     vData[index].color = c;
 }
@@ -80,22 +80,21 @@ kernel void smoothingShader
  device TVertex* dst        [[ buffer(1) ]],
  uint2 p [[thread_position_in_grid]])
 {
-    if(p.x > 255 || p.y > 255) return; // threadCount mismatch
+    if(p.x > SIZE3Dm || p.y > SIZE3Dm) return; // threadCount mismatch
     
-    int index = int(p.y) * 256 + int(p.x);
+    int index = int(p.y) * SIZE3D + int(p.x);
     
-    if(p.x < 1 || p.x > 254 || p.y < 1 || p.y > 254) {
-        dst[index] = src[index];
-        return;
-    }
-    
-    TVertex v = src[index];
+    if(p.x == 0) p.x = 1; else if(p.x > SIZE3D-2) p.x = SIZE3D-3;
+    if(p.y == 0) p.y = 1; else if(p.y > SIZE3D-2) p.y = SIZE3D-3;
+    int vIndex = int(p.y) * SIZE3D + int(p.x);
+
+    TVertex v = src[vIndex];
     
     for(int x = -1; x <= 1; ++x) {
         for(int y = -1; y <= 1; ++y) {
             if(y == 0) continue;
             
-            int index2 = index + y * 256 + x;
+            int index2 = vIndex + y * SIZE3D + x;
             v.pos.y += src[index2].pos.y;
             v.color += src[index2].color;
         }
@@ -108,40 +107,17 @@ kernel void smoothingShader
 }
 
 /////////////////////////////////////////////////////////////////////////
-// smoothing shader skips the edge vertices.
-// this routine sets edge data to match neighbors.
-
-kernel void edgeShader
-(
- device TVertex* v [[ buffer(0) ]],
- uint2 p [[thread_position_in_grid]])
-{
-    if(p.x > 255 || p.y > 255) return; // threadCount mismatch
-    
-    int index = int(p.y) * 256 + int(p.x);
-    int index2 = index;
-    
-    if(p.x == 0) index2 += 1; else if(p.x == 255) index2 -= 1;
-    if(p.y == 0) index2 += 256; else if(p.y == 255) index2 -= 256;
-    
-    if(index2 != index) {
-        v[index].pos.y = v[index2].pos.y;
-        v[index].color = v[index2].color;
-    }
-}
-
-/////////////////////////////////////////////////////////////////////////
 
 kernel void normalShader
 (
  device TVertex* v [[ buffer(0) ]],
  uint2 p [[thread_position_in_grid]])
 {
-    if(p.x > 255 || p.y > 255) return; // threadCount mismatch
+    if(p.x > SIZE3Dm || p.y > SIZE3Dm) return; // threadCount mismatch
     
-    int i = int(p.y) * 256 + int(p.x);
-    int i2 = i + ((p.x < 255) ? 1 : -1);
-    int i3 = i + ((p.y < 255) ? 256 : -256);
+    int i = int(p.y) * SIZE3D + int(p.x);
+    int i2 = i + ((p.x < SIZE3Dm) ? 1 : -1);
+    int i3 = i + ((p.y < SIZE3Dm) ? SIZE3D : -SIZE3D);
     
     TVertex v1 = v[i];
     TVertex v2 = v[i2];

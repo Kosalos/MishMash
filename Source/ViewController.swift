@@ -198,7 +198,7 @@ class ViewController: UIViewController {
             catch { print("pipeline failure for : " + name); exit(0) }
         }
         
-        let shaderNames = [ "fractalShader","shadowShader","heightMapShader","smoothingShader","edgeShader","normalShader" ]
+        let shaderNames = [ "fractalShader","shadowShader","heightMapShader","smoothingShader","normalShader" ]
         for i in 0 ..< shaderNames.count { pipeline.append(loadShader(shaderNames[i])) }
         
         controlBuffer = device.makeBuffer(bytes: &control, length: MemoryLayout<Control>.stride, options: MTLResourceOptions.storageModeShared)
@@ -627,19 +627,6 @@ class ViewController: UIViewController {
                     commandBuffer.commit()
                     commandBuffer.waitUntilCompleted()
                 }
-                
-                // clean up edges after smoothing session
-                do {
-                    let commandBuffer = commandQueue.makeCommandBuffer()!
-                    let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
-
-                    commandEncoder.setComputePipelineState(pipeline[4])
-                    commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
-                    commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
-                    commandEncoder.endEncoding()
-                    commandBuffer.commit()
-                    commandBuffer.waitUntilCompleted()
-                }
             }
         }
         
@@ -648,7 +635,7 @@ class ViewController: UIViewController {
             let commandBuffer = commandQueue.makeCommandBuffer()!
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
             
-            commandEncoder.setComputePipelineState(pipeline[5])
+            commandEncoder.setComputePipelineState(pipeline[4])
             commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)            
             commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
             commandEncoder.endEncoding()
