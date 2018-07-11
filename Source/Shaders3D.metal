@@ -22,7 +22,7 @@ vertex Transfer texturedVertexShader
     out.color = v.color;
     out.position = constantData.mvp * float4(v.pos, 1.0);
     
-    float intensity = 0.2 + saturate(dot(vData[vid].nrm.rgb, constantData.light));
+    float intensity = 0.2 + saturate(dot(vData[vid].nrm.rgb, constantData.light.xyz));
     out.lighting = float4(intensity,intensity,intensity,1);
     
     return out;
@@ -78,10 +78,8 @@ kernel void smoothingShader
 (
  constant TVertex* src      [[ buffer(0) ]],
  device TVertex* dst        [[ buffer(1) ]],
- constant Control &control  [[ buffer(2) ]],
  uint2 p [[thread_position_in_grid]])
 {
-    if(control.smooth == 0) return;
     if(p.x > 255 || p.y > 255) return; // threadCount mismatch
     
     int index = int(p.y) * 256 + int(p.x);
@@ -94,7 +92,6 @@ kernel void smoothingShader
     TVertex v = src[index];
     
     for(int x = -1; x <= 1; ++x) {
-        if(x == 0) continue;
         for(int y = -1; y <= 1; ++y) {
             if(y == 0) continue;
             
@@ -104,7 +101,7 @@ kernel void smoothingShader
         }
     }
     
-    v.pos.y /= 7;  // mathematically should be 9, but this works better
+    v.pos.y /= 7;
     v.color /= 7;
     
     dst[index] = v;

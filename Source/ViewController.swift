@@ -65,19 +65,19 @@ class ViewController: UIViewController {
     @IBOutlet var g2: GroupView!
     @IBOutlet var g3: GroupView!
     @IBOutlet var g4: GroupView!
-
+    
     @IBAction func smoothButtonPressed(_ sender: UIButton) {
         control.smooth += 1
-        if control.smooth > 4 { control.smooth = 0 }
+        if control.smooth > 2 { control.smooth = 0 }
         refresh()
     }
-
+    
     @IBAction func zoomButtonPressed(_ sender: UIButton) {
         control.zoom += 1
         if control.zoom > 2 { control.zoom = 0 }
         refresh()
     }
-
+    
     @IBAction func is3DButtonPressed(_ sender: UIButton) {
         is3D = !is3D
         initRenderViews()
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         initRenderViews()
         refresh()
     }
-
+    
     @IBAction func loadNextButtonPressed(_ sender: UIButton) {
         let ss = SaveLoadViewController()
         ss.loadNext()
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func emailButtonPressed(_ sender: UIButton) { sendEmail() }
-
+    
     @IBAction func rndGButtonPressed(_ sender: UIButton) {
         controlRandomGrammar()
         loadedData()
@@ -168,9 +168,9 @@ class ViewController: UIViewController {
         sB.initSingle(&control.B, 0,1,0.15, "Color B")
         sContrast.initSingle(&control.contrast, 0.1,5,0.5, "Contrast")
         
-        sHeight.initSingle(&control.height,-50,50,5, "Height")
+        sHeight.initSingle(&control.height,-70,70,7, "Height")
         sHeight.highlight(0)
-
+        
         gDevice = MTLCreateSystemDefaultDevice()
         
         initRenderViews()
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
         
         d3ViewL.device = gDevice
         d3ViewR.device = gDevice
-
+        
         guard let newRenderer = Renderer(metalKitView: d3ViewL, 0) else { fatalError("Renderer cannot be initialized") }
         rendererL = newRenderer
         rendererL.mtkView(d3ViewL, drawableSizeWillChange: d3ViewL.drawableSize)
@@ -188,7 +188,7 @@ class ViewController: UIViewController {
         rendererR = newRenderer2
         rendererR.mtkView(d3ViewR, drawableSizeWillChange: d3ViewR.drawableSize)
         d3ViewR.delegate = rendererR
-
+        
         func loadShader(_ name:String) -> MTLComputePipelineState {
             do {
                 let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
@@ -200,7 +200,7 @@ class ViewController: UIViewController {
         
         let shaderNames = [ "fractalShader","shadowShader","heightMapShader","smoothingShader","edgeShader","normalShader" ]
         for i in 0 ..< shaderNames.count { pipeline.append(loadShader(shaderNames[i])) }
-
+        
         controlBuffer = device.makeBuffer(bytes: &control, length: MemoryLayout<Control>.stride, options: MTLResourceOptions.storageModeShared)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -234,14 +234,14 @@ class ViewController: UIViewController {
             isStereoButton.isHidden = false
             smoothButton.isHidden = false
             zoomButton.isHidden = false
-
+            
             var vr = self.view.bounds
             d3ViewL.frame = vr
-
+            
             if isStereo {
                 vr.size.width /= 2 
                 d3ViewL.frame = vr
-
+                
                 d3ViewR.isHidden = false
                 vr.origin.x += vr.width
                 d3ViewR.frame = vr
@@ -258,7 +258,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: -
-
+    
     @objc func timerKick() { loadedData() }
     
     //MARK: -
@@ -267,7 +267,7 @@ class ViewController: UIViewController {
      1. launchOptions captured in AppDelegate didFinishLaunchingWithOptions()
      2. these routines just below to handle Loading data from launchOptions, and using docController to send the data
      3. edit project settings:  Target <Info> section, note the items added to "Document Types", "Imported UTIs" and "Exported UTIs"
-
+     
      how to send:
      1.use the program as usual to display an image you like
      2.press "E" to launch airDrop popup.  Select 'Mail' icon.  Send email..
@@ -277,24 +277,24 @@ class ViewController: UIViewController {
      2. select the email with MishMash attachment.
      3. Tap attachment, then "Copy to MishMash" icon
      4. TODO:  image is loaded okay, but sometimes the app needs to be touched for force correct redraw.
-    */
+     */
     
     // https://stackoverflow.com/questions/29399341/uidocumentinteractioncontroller-swift
     var fileURL:URL! = nil
     var docController:UIDocumentInteractionController!
-
+    
     func sendEmail() {
         var fileURL:URL! = nil
         let name = "MishMash.msh"
         fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(name)
-
+        
         do {
             control.version = Int32(versionNumber)
             let sz = MemoryLayout<Control>.size
             let data = NSData(bytes:&control, length: sz)
             try data.write(to: fileURL, options: .atomic)
         } catch { print(error); return }
-
+        
         docController = UIDocumentInteractionController(url: fileURL)
         _ = docController.presentOptionsMenu(from: emailButton.frame, in:emailButton, animated:true) // !!  this must be a button
     }
@@ -311,7 +311,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: -
-
+    
     @objc func timerHandler() {
         if isBusy { return }
         
@@ -431,7 +431,7 @@ class ViewController: UIViewController {
         sMultiplier.frame = frame(cxs,bys,cxs+5,0)
         autoButton.frame = frame(cxs/2-3,bys,cxs/2,0)
         emailButton.frame = frame(cxs/2,bys,0,0)
-
+        
         x = 10 + gxs
         y += gap
         let t2List = [ sEscapeRadius,sStripeDensity,sContrast,shadowButton ] as [UIView]
@@ -443,7 +443,7 @@ class ViewController: UIViewController {
         y = gap + 5
         let t3List = [ sR,sG,sB,loadNextButton ] as [UIView]
         for t in t3List { t.frame = frame(cxs,bys,0,gap) }
-
+        
         x += cxs + 5
         y = 5
         let t4List = [ randomButton,saveLoadButton,is3DButton,sHeight] as [UIView]
@@ -452,7 +452,7 @@ class ViewController: UIViewController {
         zoomButton.frame = frame(cxs/2,bys,0,gap)
         x -= cxs/2
         isStereoButton.frame = frame(cxs,bys,0,0)
-    
+        
         x -= 52
         y += 12
         helpButton.frame = frame(bys,bys,0,0)
@@ -562,7 +562,7 @@ class ViewController: UIViewController {
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
     }
-
+    
     //MARK: -
     
     var isBusy:Bool = false
@@ -585,41 +585,56 @@ class ViewController: UIViewController {
     func update3DRendition() {
         // set height and color given 2D image
         do {
-        let commandBuffer = commandQueue.makeCommandBuffer()!
-        let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
-        
-        commandEncoder.setComputePipelineState(pipeline[2])
-        commandEncoder.setTexture(shadowFlag ? texture2 : texture1, index: 0)
-        commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
-        commandEncoder.setBuffer(controlBuffer, offset: 0, index: 1)
-        commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
-        commandEncoder.endEncoding()
-        commandBuffer.commit()
-        commandBuffer.waitUntilCompleted()
+            let commandBuffer = commandQueue.makeCommandBuffer()!
+            let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+            
+            commandEncoder.setComputePipelineState(pipeline[2])
+            commandEncoder.setTexture(shadowFlag ? texture2 : texture1, index: 0)
+            commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
+            commandEncoder.setBuffer(controlBuffer, offset: 0, index: 1)
+            commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+            commandEncoder.endEncoding()
+            commandBuffer.commit()
+            commandBuffer.waitUntilCompleted()
         }
         
         // apply smoothing
         if control.smooth > 0 {
-            for i in 0 ..< control.smooth {
-                let commandBuffer = commandQueue.makeCommandBuffer()!
-                let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+            for _ in 0 ..< control.smooth {
                 
-                commandEncoder.setComputePipelineState(pipeline[3])
-                commandEncoder.setBuffer((i & 1) == 0 ? vBuffer  : vBuffer2, offset: 0, index: 0)
-                commandEncoder.setBuffer((i & 1) == 0 ? vBuffer2 : vBuffer,  offset: 0, index: 1)
-                commandEncoder.setBuffer(controlBuffer, offset: 0, index: 2)
-                commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
-                commandEncoder.endEncoding()
-                commandBuffer.commit()
-                commandBuffer.waitUntilCompleted()
+                // v -> v2 ------------------------------------------
+                do {
+                    let commandBuffer = commandQueue.makeCommandBuffer()!
+                    let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+                    commandEncoder.setComputePipelineState(pipeline[3])
+                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 0)
+                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 1)
+                    commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+                    commandEncoder.endEncoding()
+                    commandBuffer.commit()
+                    commandBuffer.waitUntilCompleted()
+                }
+                
+                // v2 -> v ------------------------------------------
+                do {
+                    let commandBuffer = commandQueue.makeCommandBuffer()!
+                    let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+                    commandEncoder.setComputePipelineState(pipeline[3])
+                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 0)
+                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 1)
+                    commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+                    commandEncoder.endEncoding()
+                    commandBuffer.commit()
+                    commandBuffer.waitUntilCompleted()
+                }
                 
                 // clean up edges after smoothing session
                 do {
                     let commandBuffer = commandQueue.makeCommandBuffer()!
                     let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
-                    
+
                     commandEncoder.setComputePipelineState(pipeline[4])
-                    commandEncoder.setBuffer((i & 1) == 0 ? vBuffer2 : vBuffer, offset: 0, index: 0)
+                    commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
                     commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
                     commandEncoder.endEncoding()
                     commandBuffer.commit()
@@ -634,16 +649,16 @@ class ViewController: UIViewController {
             let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
             
             commandEncoder.setComputePipelineState(pipeline[5])
-            commandEncoder.setBuffer((control.smooth & 1) == 0 ? vBuffer2 : vBuffer, offset: 0, index: 0)            
+            commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)            
             commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
             commandEncoder.endEncoding()
             commandBuffer.commit()
             commandBuffer.waitUntilCompleted()
         }
-
+        
         isBusy = false
     }
-
+    
     //MARK:-
     
     var oldPt = CGPoint()
@@ -664,9 +679,9 @@ class ViewController: UIViewController {
             vc.focusMovement(pt)
         }
     }
-
+    
     //MARK:-
-
+    
     var paceRotate = CGPoint()
     
     func rotate(_ x:CGFloat, _ y:CGFloat) {
@@ -681,7 +696,7 @@ class ViewController: UIViewController {
         paceRotate.x = pt.x * scale
         paceRotate.y = pt.y * scale
     }
-
+    
     @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
         let min:Float = 1       // close
         let max:Float = 1000    // far
@@ -692,14 +707,14 @@ class ViewController: UIViewController {
     }
     
     //MARK:-
-
+    
     @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
         paceRotate.x = 0
         paceRotate.y = 0
     }
-
+    
     @IBAction func tap2Gesture(_ sender: UITapGestureRecognizer) {
         widgetBackground.isHidden = !widgetBackground.isHidden
     }
-
+    
 }
