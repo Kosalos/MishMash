@@ -6,6 +6,7 @@ using namespace metal;
 
 struct Transfer {
     float4 position [[position]];
+    float4 lighting;
     float4 color;
 };
 
@@ -21,16 +22,17 @@ vertex Transfer texturedVertexShader
     out.color = v.color;
     out.position = constantData.mvp * float4(v.pos, 1.0);
     
+    float intensity = 0.2 + saturate(dot(vData[vid].nrm.rgb, constantData.light));
+    out.lighting = float4(intensity,intensity,intensity,1);
+    
     return out;
 }
 
 fragment float4 texturedFragmentShader
 (
- Transfer data [[stage_in]],
- texture2d<float> tex2D [[texture(0)]],
- sampler sampler2D [[sampler(0)]])
+ Transfer data [[stage_in]])
 {
-    return data.color;
+    return data.color * data.lighting;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -43,7 +45,7 @@ kernel void heightMapShader
  uint2 p [[thread_position_in_grid]])
 {
     if(p.x > 255 || p.y > 255) return; // threadCount mismatch
-
+    
     int2 pp = int2(p);   // centered on source pixels
     int size = 256;
     switch(control.zoom) {
@@ -61,7 +63,7 @@ kernel void heightMapShader
     
     pp.x += (control.xSize - size) / 2;
     pp.y += (control.ySize - size) / 2;
-
+    
     float4 c = srcTexture.read(uint2(pp));
     float height = (c.x + c.y + c.z) * control.height / 3.0;
     
@@ -81,9 +83,9 @@ kernel void smoothingShader
 {
     if(control.smooth == 0) return;
     if(p.x > 255 || p.y > 255) return; // threadCount mismatch
-
+    
     int index = int(p.y) * 256 + int(p.x);
-
+    
     if(p.x < 1 || p.x > 254 || p.y < 1 || p.y > 254) {
         dst[index] = src[index];
         return;
@@ -102,7 +104,7 @@ kernel void smoothingShader
         }
     }
     
-    v.pos.y /= 7;
+    v.pos.y /= 7;  // mathematically should be 9, but this works better
     v.color /= 7;
     
     dst[index] = v;
@@ -129,4 +131,24 @@ kernel void edgeShader
         v[index].pos.y = v[index2].pos.y;
         v[index].color = v[index2].color;
     }
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+kernel void normalShader
+(
+ device TVertex* v [[ buffer(0) ]],
+ uint2 p [[thread_position_in_grid]])
+{
+    if(p.x > 255 || p.y > 255) return; // threadCount mismatch
+    
+    int i = int(p.y) * 256 + int(p.x);
+    int i2 = i + ((p.x < 255) ? 1 : -1);
+    int i3 = i + ((p.y < 255) ? 256 : -256);
+    
+    TVertex v1 = v[i];
+    TVertex v2 = v[i2];
+    TVertex v3 = v[i3];
+    
+    v[i].nrm = normalize(cross(v1.pos - v2.pos, v1.pos - v3.pos));
 }

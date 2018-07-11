@@ -6,7 +6,6 @@ struct TVertex {
     vector_float3 nrm;
     vector_float2 txt;
     vector_float4 color;
-    unsigned char drawStyle;
 };
 
 struct ConstantData {

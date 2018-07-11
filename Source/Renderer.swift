@@ -124,7 +124,9 @@ class Renderer: NSObject, MTKViewDelegate {
     }
     
     var pace:Int = 0
-    
+    var lightpos:float3 = float3()
+    var lAngle:Float = 0
+
     func draw(in view: MTKView) {
         
         if !is3D { return }
@@ -158,6 +160,14 @@ class Renderer: NSObject, MTKViewDelegate {
             * rotate(stereoAngle*100,float3(0,1,0))
             * arcBall.transformMatrix
 
+        if ident == 0 {
+            lightpos.x = sinf(lAngle)
+            lightpos.y = 1
+            lightpos.z = cosf(lAngle)
+            lAngle += 0.012
+            constant_buffer[0].light = normalize(lightpos)
+        }
+        
         renderEncoder?.setVertexBuffer(constants[constantsIndex], offset:0, index: 1)
 
         // ----------------------------------------------

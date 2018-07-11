@@ -20,11 +20,7 @@ class ViewController: UIViewController {
     var colorBuffer:MTLBuffer! = nil
     var texture1: MTLTexture!
     var texture2: MTLTexture!
-    var pipeline1: MTLComputePipelineState!
-    var pipeline2: MTLComputePipelineState!
-    var pipeline3: MTLComputePipelineState!
-    var pipeline4: MTLComputePipelineState!
-    var pipeline5: MTLComputePipelineState!
+    var pipeline:[MTLComputePipelineState] = []
     lazy var device: MTLDevice! = MTLCreateSystemDefaultDevice()
     lazy var commandQueue: MTLCommandQueue! = { return self.device.makeCommandQueue() }()
     var shadowFlag:Bool = false
@@ -172,7 +168,7 @@ class ViewController: UIViewController {
         sB.initSingle(&control.B, 0,1,0.15, "Color B")
         sContrast.initSingle(&control.contrast, 0.1,5,0.5, "Contrast")
         
-        sHeight.initSingle(&control.height,-40,40,4, "Height")
+        sHeight.initSingle(&control.height,-50,50,5, "Height")
         sHeight.highlight(0)
 
         gDevice = MTLCreateSystemDefaultDevice()
@@ -193,25 +189,18 @@ class ViewController: UIViewController {
         rendererR.mtkView(d3ViewR, drawableSizeWillChange: d3ViewR.drawableSize)
         d3ViewR.delegate = rendererR
 
-        do {
-            let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
-            guard let kf1 = defaultLibrary.makeFunction(name: "fractalShader")  else { fatalError() }
-            pipeline1 = try device.makeComputePipelineState(function: kf1)
-            
-            guard let kf2 = defaultLibrary.makeFunction(name: "shadowShader")  else { fatalError() }
-            pipeline2 = try device.makeComputePipelineState(function: kf2)
-            
-            guard let kf3 = defaultLibrary.makeFunction(name: "heightMapShader")  else { fatalError() }
-            pipeline3 = try device.makeComputePipelineState(function: kf3)
-
-            guard let kf4 = defaultLibrary.makeFunction(name: "smoothingShader")  else { fatalError() }
-            pipeline4 = try device.makeComputePipelineState(function: kf4)
-            
-            guard let kf5 = defaultLibrary.makeFunction(name: "edgeShader")  else { fatalError() }
-            pipeline5 = try device.makeComputePipelineState(function: kf5)
+        func loadShader(_ name:String) -> MTLComputePipelineState {
+            do {
+                let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
+                guard let fn = defaultLibrary.makeFunction(name: name)  else { print("shader not found: " + name); exit(0) }
+                return try device.makeComputePipelineState(function: fn)
+            }
+            catch { print("pipeline failure for : " + name); exit(0) }
         }
-        catch { fatalError("error creating pipelines") }
         
+        let shaderNames = [ "fractalShader","shadowShader","heightMapShader","smoothingShader","edgeShader","normalShader" ]
+        for i in 0 ..< shaderNames.count { pipeline.append(loadShader(shaderNames[i])) }
+
         controlBuffer = device.makeBuffer(bytes: &control, length: MemoryLayout<Control>.stride, options: MTLResourceOptions.storageModeShared)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -547,7 +536,7 @@ class ViewController: UIViewController {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
         
-        commandEncoder.setComputePipelineState(pipeline1)
+        commandEncoder.setComputePipelineState(pipeline[0])
         commandEncoder.setTexture(texture1, index: 0)
         commandEncoder.setBuffer(controlBuffer, offset: 0, index: 0)
         commandEncoder.setBuffer(colorBuffer, offset: 0, index: 1)
@@ -564,7 +553,7 @@ class ViewController: UIViewController {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
         
-        commandEncoder.setComputePipelineState(pipeline2)
+        commandEncoder.setComputePipelineState(pipeline[1])
         commandEncoder.setTexture(texture1, index: 0)
         commandEncoder.setTexture(texture2, index: 1)
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
@@ -599,7 +588,7 @@ class ViewController: UIViewController {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
         
-        commandEncoder.setComputePipelineState(pipeline3)
+        commandEncoder.setComputePipelineState(pipeline[2])
         commandEncoder.setTexture(shadowFlag ? texture2 : texture1, index: 0)
         commandEncoder.setBuffer(vBuffer, offset: 0, index: 0)
         commandEncoder.setBuffer(controlBuffer, offset: 0, index: 1)
@@ -615,17 +604,9 @@ class ViewController: UIViewController {
                 let commandBuffer = commandQueue.makeCommandBuffer()!
                 let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
                 
-                commandEncoder.setComputePipelineState(pipeline4)
-                
-                if (i & 1) == 0 {
-                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 0)
-                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 1)
-                }
-                else {
-                    commandEncoder.setBuffer(vBuffer2, offset: 0, index: 0)
-                    commandEncoder.setBuffer(vBuffer,  offset: 0, index: 1)
-                }
-
+                commandEncoder.setComputePipelineState(pipeline[3])
+                commandEncoder.setBuffer((i & 1) == 0 ? vBuffer  : vBuffer2, offset: 0, index: 0)
+                commandEncoder.setBuffer((i & 1) == 0 ? vBuffer2 : vBuffer,  offset: 0, index: 1)
                 commandEncoder.setBuffer(controlBuffer, offset: 0, index: 2)
                 commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
                 commandEncoder.endEncoding()
@@ -637,15 +618,8 @@ class ViewController: UIViewController {
                     let commandBuffer = commandQueue.makeCommandBuffer()!
                     let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
                     
-                    commandEncoder.setComputePipelineState(pipeline5)
-                    
-                    if (i & 1) == 0 {
-                        commandEncoder.setBuffer(vBuffer2, offset: 0, index: 0)
-                    }
-                    else {
-                        commandEncoder.setBuffer(vBuffer,  offset: 0, index: 0)
-                    }
-                    
+                    commandEncoder.setComputePipelineState(pipeline[4])
+                    commandEncoder.setBuffer((i & 1) == 0 ? vBuffer2 : vBuffer, offset: 0, index: 0)
                     commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
                     commandEncoder.endEncoding()
                     commandBuffer.commit()
@@ -654,6 +628,19 @@ class ViewController: UIViewController {
             }
         }
         
+        // calc vertex normals
+        do {
+            let commandBuffer = commandQueue.makeCommandBuffer()!
+            let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+            
+            commandEncoder.setComputePipelineState(pipeline[5])
+            commandEncoder.setBuffer((control.smooth & 1) == 0 ? vBuffer2 : vBuffer, offset: 0, index: 0)            
+            commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+            commandEncoder.endEncoding()
+            commandBuffer.commit()
+            commandBuffer.waitUntilCompleted()
+        }
+
         isBusy = false
     }
 
