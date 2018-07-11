@@ -20,7 +20,7 @@ That cycle count is used to determine the color for that single pixel.
 
 Collection of algorithms and UX from several other fractal apps,\
 hoping to come with a new and interesting display.\
-This is my new most favorite app.  Best 2D modern art!
+This is my new most favorite app.  Best 2D modern art!\
 3D effects work great too.
 
 ![Screenshot](screenshot.png)
